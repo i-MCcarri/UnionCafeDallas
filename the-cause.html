@@ -35,10 +35,10 @@
             font-weight: 700;
             font-size: 1.8rem;
             letter-spacing: -0.05em;
-            color: var(--gold);
+            color: var(--white);
             line-height: 1;
         }
-        
+
         /* Accessibility Panel */
         .accessibility-panel { transform: translateX(100%); transition: transform 0.3s ease; }
         .accessibility-panel.open { transform: translateX(0); }
@@ -69,39 +69,68 @@
 </head>
 <body id="mainBody">
 
-    <button onclick="togglePanel()" class="fixed bottom-6 right-6 z-[100] bg-[#D4AF37] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs" aria-label="Accessibility Options">
-        <span>⚙️ Accessibility</span>
-    </button>
-
-    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-72 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white">
-        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
-        <div class="space-y-6">
-            <label class="flex items-center justify-between cursor-pointer">
-                <span class="text-sm uppercase tracking-widest text-white">Light Mode</span>
-                <input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5">
-            </label>
-            <label class="flex items-center justify-between cursor-pointer">
-                <span class="text-sm uppercase tracking-widest text-white">High Contrast</span>
-                <input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5">
-            </label>
-            <label class="flex items-center justify-between cursor-pointer">
-                <span class="text-sm uppercase tracking-widest text-white">Reading Focus</span>
-                <input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5">
-            </label>
+<div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-80 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white overflow-y-auto">
+        <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+            <h2 class="text-xl font-bold uppercase tracking-tighter">Menu & Settings</h2>
+            <button onclick="togglePanel()" class="text-2xl" aria-label="Close Menu">✕</button>
         </div>
-        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close</button>
+
+        <div class="md:hidden flex flex-col space-y-6 mb-12 border-b border-white/10 pb-10">
+        <a href="the-coffee.html" class="text-lg font-bold uppercase tracking-widest">The Coffee</a>
+        <a href="the-community.html" class="text-lg font-bold uppercase tracking-widest">The Community</a>
+        <a href="the-cause.html" class="text-lg font-bold uppercase tracking-widest">The Cause</a>
+        <a href="the-feed.html" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter bg-[#D4AF37] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">[◉"] Instagram</a>
+        <a href="the-organization.html" class="bg-white text-black px-4 py-2 rounded-sm font-bold">Organization</a>
     </div>
 
-    <nav class="p-6 flex justify-between items-center border-b border-white/10 sticky top-0 bg-[var(--bg)] z-50">
-        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span style="color:var(--gold)">DTX</span></a>
-        <div class="space-x-8 text-xs uppercase tracking-widest">
-            <a href="the-feed.html" class="text-xl font-bold tracking-tighter uppercase" style="color:var(--gold)">[◉"]</a>
+        <div class="space-y-8">
+            <p class="text-[10px] uppercase tracking-[.3em] text-gray-400 font-bold">Preferences</p>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Light Mode</span><input type="checkbox" onchange="toggleFeature('light-mode')" class="w-6 h-6"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">High Contrast</span><input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-6 h-6"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Enhanced Reading</span><input type="checkbox" onchange="toggleFeature('readable-font')" class="w-6 h-6"></label>
+        </div>
+    </div>
+
+<nav class="p-6 flex justify-between items-center fixed top-0 w-full nav-blur z-50 border-b border-white/5">
+    <a href="index.html" class="text-xl font-bold tracking-tighter flex items-center">
+        <span class="nav-logo-script">Union</span>
+        <span class="gold-text ml-2 text-[10px] tracking-[.3em]" style="color:var(--gold)">DTX</span>
+    </a>
+
+    <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold items-center">
+        <a href="the-feed.html" class="text-xl font-bold tracking-tighter uppercase" style="color:var(--gold)">[◉"]</a>
+        <a href="the-coffee.html" class="hover:text-[var(--gold)] transition">The Coffee</a>
+        <a href="the-community.html" class="hover:text-[var(--gold)] transition">The Community</a>
+        <a href="the-cause.html" class="hover:text-[var(--gold)] transition">The Cause</a>
+        <a href="the-organization.html" class="bg-white text-black px-4 py-2 rounded-sm font-bold">Organization</a>
+        <button onclick="togglePanel()" class="ml-4 opacity-70 hover:opacity-100 transition">⚙️</button>
+    </div>
+
+    <button onclick="togglePanel()" class="md:hidden flex flex-col space-y-1.5 p-2" aria-label="Open Menu">
+        <div class="w-6 h-0.5 bg-white"></div>
+        <div class="w-6 h-0.5 bg-white"></div>
+        <div class="w-6 h-0.5 bg-white"></div>
+    </button>
+</nav>
+
+<div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-80 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white overflow-y-auto">
+    <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+        <h2 class="text-xl font-bold uppercase tracking-tighter">Menu</h2>
+        <button onclick="togglePanel()" class="text-2xl">✕</button>
+    </div>
+
+    <div class="md:hidden flex flex-col space-y-6 mb-12 border-b border-white/10 pb-10">
+        <a href="the-feed.html" class="text-xl font-bold tracking-tighter uppercase" style="color:var(--gold)">[◉"]</a>
             <a href="the-coffee.html" class="text-gray-500 hover:text-[var(--text)] transition">The Coffee</a>
             <a href="the-community.html" class="text-gray-500 hover:text-[var(--text)] transition">The Community</a>
             <a href="the-cause.html" class="text-[var(--gold)] font-bold">The Cause</a>
             <a href="the-organization.html" class="bg-white text-black px-4 py-2 rounded-sm font-bold">Organization</a>
+    </div>
+
+    <div class="space-y-8">
+        <p class="text-[10px] uppercase tracking-[.3em] text-gray-400 font-bold">Preferences</p>
         </div>
-    </nav>
+</div>
 
     <header class="max-w-7xl mx-auto px-6 py-24 text-center">
         <h1 class="text-5xl md:text-8xl font-light mb-6">Brewing <br><span class="serif italic">Justice.</span></h1>

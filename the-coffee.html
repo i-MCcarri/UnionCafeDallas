@@ -93,38 +93,51 @@
 </head>
 <body id="main-content">
 
-    <button onclick="togglePanel()" class="fixed bottom-6 right-6 z-[100] bg-[#D4AF37] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs" aria-label="Accessibility Options">
-        <span>⚙️ Accessibility</span>
-    </button>
-
-    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-72 bg-neutral-900 border-l border-white/20 z-[90] p-8 shadow-2xl text-white">
-        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
-        <div class="space-y-6">
-            <label class="flex items-center justify-between cursor-pointer">
-                <span class="text-sm uppercase tracking-widest">Light Mode</span>
-                <input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5">
-            </label>
-            <label class="flex items-center justify-between cursor-pointer">
-                <span class="text-sm uppercase tracking-widest">High Contrast</span>
-                <input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5">
-            </label>
-            <label class="flex items-center justify-between cursor-pointer">
-                <span class="text-sm uppercase tracking-widest">Better Reading</span>
-                <input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5">
-            </label>
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-80 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white overflow-y-auto">
+        <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+            <h2 class="text-xl font-bold uppercase tracking-tighter">Menu & Settings</h2>
+            <button onclick="togglePanel()" class="text-2xl" aria-label="Close Menu">✕</button>
         </div>
-        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close Menu</button>
+
+        <div class="md:hidden flex flex-col space-y-6 mb-12 border-b border-white/10 pb-10">
+        <a href="the-feed.html" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter bg-[#D4AF37] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">[◉"]</a>
+        <a href="https://www.uniondallas.org/room-reservation" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase bg-[#ffffff] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">Reservations</a>
+        <a href="the-coffee.html" class="text-lg font-bold uppercase tracking-widest">The Coffee</a>
+        <a href="the-community.html" class="text-lg font-bold uppercase tracking-widest">The Community</a>
+        <a href="the-cause.html" class="text-lg font-bold uppercase tracking-widest">The Cause</a>
+        <a href="explore-the-menu.html" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter bg-[#D4AF37] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">Explore Full Menu</a>
     </div>
 
-    <nav class="p-6 flex justify-between items-center border-b border-white/10">
-        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span> <span style="color:var(--gold)">DTX</span></a>
-        <div class="space-x-6 text-xs uppercase tracking-widest">
-            <a href="explore-the-menu.html" class="text-[var(--gold)] font-bold">Explore Full Menu</a>
-            <a href="the-coffee.html" class="text-[var(--gold)] font-bold">The Coffee</a>
-            <a href="the-community.html" class="text-gray-500 hover:text-white transition">The Community</a>
-            <a href="the-cause.html" class="text-gray-500 hover:text-white transition ">The Cause</a>
+        <div class="space-y-8">
+            <p class="text-[10px] uppercase tracking-[.3em] text-gray-400 font-bold">Preferences</p>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Light Mode</span><input type="checkbox" onchange="toggleFeature('light-mode')" class="w-6 h-6"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">High Contrast</span><input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-6 h-6"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Enhanced Reading</span><input type="checkbox" onchange="toggleFeature('readable-font')" class="w-6 h-6"></label>
         </div>
-    </nav>
+    </div>
+
+<nav class="p-6 flex justify-between items-center fixed top-0 w-full nav-blur z-50 border-b border-white/5">
+    <a href="index.html" class="text-xl font-bold tracking-tighter flex items-center">
+        <span class="nav-logo-script">Union</span>
+        <span class="gold-text ml-2 text-[10px] tracking-[.3em]" style="color:var(--gold)">DTX</span>
+    </a>
+
+    <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold items-center">
+        <a href="the-feed.html" class="text-xl font-bold tracking-tighter uppercase" style="color:var(--gold)">[◉"]</a>
+        <a href="https://www.uniondallas.org/room-reservation" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase bg-[#ffffff] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">Reservations</a>
+        <a href="the-coffee.html" class="hover:text-[var(--gold)] transition">The Coffee</a>
+        <a href="the-community.html" class="hover:text-[var(--gold)] transition">The Community</a>
+        <a href="the-cause.html" class="hover:text-[var(--gold)] transition">The Cause</a>
+        <a href="explore-the-menu.html" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter bg-[#D4AF37] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">Explore Full Menu</a>
+        <button onclick="togglePanel()" class="ml-4 opacity-70 hover:opacity-100 transition">⚙️</button>
+    </div>
+
+    <button onclick="togglePanel()" class="md:hidden flex flex-col space-y-1.5 p-2" aria-label="Open Menu">
+        <div class="w-6 h-0.5 bg-white"></div>
+        <div class="w-6 h-0.5 bg-white"></div>
+        <div class="w-6 h-0.5 bg-white"></div>
+    </button>
+</nav>
 
     <header class="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2000" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Coffee Pour Over">
@@ -142,9 +155,7 @@
                 <p class="text-gray-500">Seasonal selections from our partners.</p>
             </div>
             <div class="flex gap-4">
-                <a href="the-feed.html" class="text-xl font-bold tracking-tighter uppercase" style="color:var(--gold)">[◉"]</a>
-                <a href="https://www.uniondallas.org/room-reservation" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase bg-[#ffffff] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">Reservations</a>
-                <a href="explore-the-menu.html" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter bg-[#D4AF37] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">Explore Full Menu</a>
+                
                 <span class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter">Direct Trade</span>
                 <span class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter">Single Origin</span>
                 <span class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter">Whole Bean</span>

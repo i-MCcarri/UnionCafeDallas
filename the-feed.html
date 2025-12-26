@@ -74,14 +74,42 @@
         <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close</button>
     </div>
 
-    <nav class="p-6 flex justify-between items-center sticky top-0 bg-[var(--bg)]/90 backdrop-blur-md z-50 border-b border-white/10">
-        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span style="color:var(--gold)">DAL</span></a>
-        <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold">
-            <a href="the-coffee.html" class="hover:text-[var(--gold)] transition">The Coffee</a>
-            <a href="the-community.html" class="hover:text-[var(--gold)] transition">The Community</a>
-            <a href="the-feed.html" class="text-[var(--gold)]">The Feed</a>
+    <nav class="p-6 flex justify-between items-center fixed top-0 w-full nav-blur z-50 border-b border-white/5">
+    <a href="index.html" class="text-xl font-bold tracking-tighter flex items-center">
+        <span class="nav-logo-script">Union</span>
+        <span class="gold-text ml-2 text-[10px] tracking-[.3em]" style="color:var(--gold)">DALLAS</span>
+    </a>
+
+    <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold items-center">
+        <a href="the-coffee.html" class="hover:text-[var(--gold)] transition">The Coffee</a>
+        <a href="the-community.html" class="hover:text-[var(--gold)] transition">The Community</a>
+        <a href="the-cause.html" class="hover:text-[var(--gold)] transition">The Cause</a>
+        <button onclick="togglePanel()" class="ml-4 opacity-70 hover:opacity-100 transition">⚙️</button>
+    </div>
+
+    <button onclick="togglePanel()" class="md:hidden flex flex-col space-y-1.5 p-2" aria-label="Open Menu">
+        <div class="w-6 h-0.5 bg-white"></div>
+        <div class="w-6 h-0.5 bg-white"></div>
+        <div class="w-6 h-0.5 bg-white"></div>
+    </button>
+</nav>
+
+<div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-80 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white overflow-y-auto">
+    <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+        <h2 class="text-xl font-bold uppercase tracking-tighter">Menu</h2>
+        <button onclick="togglePanel()" class="text-2xl">✕</button>
+    </div>
+
+    <div class="md:hidden flex flex-col space-y-6 mb-12 border-b border-white/10 pb-10">
+        <a href="explore-the-menu.html" class="text-lg font-bold uppercase tracking-widest">The Menu</a>
+        <a href="the-community.html" class="text-lg font-bold uppercase tracking-widest">The Community</a>
+        <a href="the-cause.html" class="text-lg font-bold uppercase tracking-widest">The Cause</a>
+    </div>
+
+    <div class="space-y-8">
+        <p class="text-[10px] uppercase tracking-[.3em] text-gray-400 font-bold">Preferences</p>
         </div>
-    </nav>
+</div>
 
     <header class="max-w-7xl mx-auto px-6 pt-24 pb-12 border-b border-white/5">
         <h1 class="text-6xl md:text-8xl font-light tracking-tighter">The <span class="serif italic">Digital Estuary.</span></h1>

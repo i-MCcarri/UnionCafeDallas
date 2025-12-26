@@ -7,12 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
-        /* Logo Brand Colors */
         :root { 
             --gold: #D4AF37; 
             --bg: #121212; 
             --text: #f4f4f4; 
-            /* Section Colors */
             --brand-terracotta: #D16B3D;
             --brand-teal: #6BC3B6;
             --brand-slate: #3C4852;
@@ -25,158 +23,94 @@
             transition: all 0.3s ease; 
         }
 
-        .serif { 
-            font-family: 'Playfair Display', serif; 
-        }
+        .serif { font-family: 'Playfair Display', serif; }
         
-        /* Theme Overrides (Accessibility) */
-        body.light-mode { 
-            --bg: #ffffff; 
-            --text: #121212; 
-        }
-
-        body.light-mode .nav-blur { 
-            background: rgba(255, 255, 255, 0.9); 
-            border-bottom: 1px solid #ddd; 
-        }
-
-        body.light-mode .section-card, body.light-mode .history-section { 
-            background-color: #f8f8f8 !important; 
-            color: #121212; 
-            border-bottom: 1px solid #ddd; 
-        }
-
-        body.high-contrast { 
-            --bg: #000000; 
-            --text: #ffffff; 
-        }
-
-        body.high-contrast .section-card, body.high-contrast .history-section { 
-            background-color: #000000 !important; 
-            border: 1px solid #ffffff; 
-        }
-
-        body.high-contrast .gold-text { 
-            color: #ffff00; 
-            font-weight: bold; 
-        }
-
-        body.high-contrast button, body.high-contrast a.btn { 
-            border: 3px solid #ffff00 !important; 
-            background: black !important; 
-            color: white !important; 
-        }
-
-        body.readable-font { 
-            font-family: system-ui, -apple-system, sans-serif !important; 
-            line-height: 1.8 !important; 
-            letter-spacing: 0.05rem !important; 
-        }
+        /* Theme Overrides */
+        body.light-mode { --bg: #ffffff; --text: #121212; }
+        body.high-contrast { --bg: #000000; --text: #ffffff; }
+        body.high-contrast .gold-text { color: #ffff00; font-weight: bold; }
+        body.readable-font { font-family: system-ui, sans-serif !important; line-height: 1.8 !important; }
         
-        /* Script Logo Styling */
         .nav-logo-script {
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-weight: 700;
             font-size: 1.8rem;
             letter-spacing: -0.05em;
-            color: var(--white);
+            color: white;
             line-height: 1;
         }
 
-        .nav-blur { 
-            backdrop-filter: blur(10px); 
-            background: rgba(18, 18, 18, 0.8); 
-        }
+        .nav-blur { backdrop-filter: blur(10px); background: rgba(18, 18, 18, 0.8); }
 
         .accessibility-panel { 
             transform: translateX(100%); 
-            transition: transform 0.3s ease; 
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
         }
 
-        .accessibility-panel.open { 
-            transform: translateX(0); 
-        }
+        .accessibility-panel.open { transform: translateX(0); }
         
-        .section-card { 
-            min-height: 60vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            padding: 3rem; 
-            transition: background-color 0.3s; 
-        }
+        .section-card { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; padding: 3rem; }
+        .bg-terracotta { background-color: var(--brand-terracotta); color: white; }
+        .bg-teal { background-color: var(--brand-teal); color: #121212; }
+        .bg-slate { background-color: var(--brand-slate); color: white; }
         
-        /* Specific Section Backgrounds */
-        .bg-terracotta { 
-            background-color: var(--brand-terracotta); 
-            color: white; 
-        }
-
-        .bg-teal { 
-            background-color: var(--brand-teal); 
-            color: #121212; 
-        }
-
-        .bg-slate { 
-            background-color: var(--brand-slate); 
-            color: white; 
-        }
-
-        /* History Section Styling */
-        .history-section { 
-            background-color: var(--brand-slate); 
-            color: white; 
-            padding: 5rem 3rem; 
-            border-top: 1px solid rgba(255,255,255,0.1); 
-        }
-
+        .history-section { background-color: var(--brand-slate); color: white; padding: 5rem 3rem; border-top: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body id="mainBody">
 
-    <button onclick="togglePanel()" class="fixed bottom-6 right-6 z-[100] bg-[#D4AF37] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs" aria-label="Accessibility Options">
-        <span>⚙️ Accessibility</span>
-    </button>
-
-    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-72 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white">
-        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
-        <div class="space-y-6">
-            <label class="flex items-center justify-between cursor-pointer text-white">
-                <span class="text-sm uppercase tracking-widest">Light Mode</span>
-                <input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5">
-            </label>
-            <label class="flex items-center justify-between cursor-pointer text-white">
-                <span class="text-sm uppercase tracking-widest">High Contrast</span>
-                <input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5">
-            </label>
-            <label class="flex items-center justify-between cursor-pointer text-white">
-                <span class="text-sm uppercase tracking-widest">Enhanced Reading</span>
-                <input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5">
-            </label>
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-80 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white overflow-y-auto">
+        <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+            <h2 class="text-xl font-bold uppercase tracking-tighter">Menu & Settings</h2>
+            <button onclick="togglePanel()" class="text-2xl" aria-label="Close Menu">✕</button>
         </div>
-        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close</button>
+
+        <div class="md:hidden flex flex-col space-y-6 mb-12">
+            <a href="the-feed.html" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter bg-[#D4AF37] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">[◉"]</a>
+            <a href="the-coffee.html" class="text-lg font-bold uppercase tracking-widest hover:text-[var(--gold)]">The Coffee</a>
+            <a href="the-community.html" class="text-lg font-bold uppercase tracking-widest hover:text-[var(--gold)]">The Community</a>
+            <a href="the-cause.html" class="text-lg font-bold uppercase tracking-widest hover:text-[var(--gold)]">The Cause</a>
+            <button onclick="location.href='https://uniondallas-bloom.kindful.com'" class="bg-[#D4AF37] text-black px-4 py-3 rounded-sm font-bold uppercase text-sm">Donate Now</button>
+        </div>
+
+        <div class="space-y-8">
+            <p class="text-[10px] uppercase tracking-[.3em] text-gray-400 font-bold">Preferences</p>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Light Mode</span><input type="checkbox" onchange="toggleFeature('light-mode')" class="w-6 h-6"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">High Contrast</span><input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-6 h-6"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Enhanced Reading</span><input type="checkbox" onchange="toggleFeature('readable-font')" class="w-6 h-6"></label>
+        </div>
     </div>
 
     <nav class="p-6 flex justify-between items-center fixed top-0 w-full nav-blur z-50 border-b border-white/5">
-        <a href="#" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span class="gold-text" style="color:var(--gold)">DALLAS</span></a>
-        <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold">
+        <a href="index.html" class="text-xl font-bold tracking-tighter flex items-center">
+            <span class="nav-logo-script">Union</span>
+            <span class="gold-text ml-2 text-[10px] tracking-[.3em]" style="color:var(--gold)">DALLAS</span>
+        </a>
+
+        <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold items-center">
             <a href="the-coffee.html" class="hover:text-[var(--gold)] transition">The Coffee</a>
             <a href="the-community.html" class="hover:text-[var(--gold)] transition">The Community</a>
             <a href="the-cause.html" class="hover:text-[var(--gold)] transition">The Cause</a>
-            <button onclick="location.href='https://uniondallas-bloom.kindful.com'"class="bg-[#D4AF37] text-black px-4 py-2 rounded-sm font-bold">Donate Now</button>
+            <button onclick="location.href='https://uniondallas-bloom.kindful.com'" class="bg-[#D4AF37] text-black px-4 py-2 rounded-sm font-bold">Donate Now</button>
+            <button onclick="togglePanel()" class="ml-4 opacity-70 hover:opacity-100 transition" aria-label="Settings">⚙️</button>
         </div>
+
+        <button onclick="togglePanel()" class="md:hidden flex flex-col space-y-1.5 p-2" aria-label="Open Menu">
+            <div class="w-6 h-0.5 bg-white"></div>
+            <div class="w-6 h-0.5 bg-white"></div>
+            <div class="w-6 h-0.5 bg-white"></div>
+        </button>
     </nav>
 
-    <main class="flex flex-col md:flex-row pt-16">
-        
-        <div class="w-full md:w-1/3 section-card bg-terracotta border-r border-white/10">
+    <main class="flex flex-col md:flex-row pt-20">
+        <div class="w-full md:w-1/3 section-card bg-terracotta border-b md:border-b-0 md:border-r border-white/10">
             <h2 class="text-4xl md:text-5xl font-light mb-4">Coffee for <br><span class="serif italic">Change.</span></h2>
             <p class="text-white/80 mb-8 text-lg">Setting a high bar for specialty coffee in Dallas while sourcing beans grown sustainably and roasted locally.</p>
             <a href="explore-the-menu.html" class="btn border border-white px-8 py-3 w-max hover:bg-white hover:text-black transition uppercase tracking-widest text-xs">Explore the Menu</a>
         </div>
 
-        <div class="w-full md:w-1/3 section-card bg-teal border-r border-white/10">
+        <div class="w-full md:w-1/3 section-card bg-teal border-b md:border-b-0 md:border-r border-white/10">
             <h2 class="text-4xl md:text-5xl font-light mb-4">A Hub for <br><span class="serif italic">All.</span></h2>
             <p class="text-black/60 mb-8 text-lg">A "social estuary" where we cultivate the divine spark in neighbors through robust community and engaging causes.</p>
             <a href="join-sunday-gathering.html" class="btn bg-black text-white px-8 py-3 w-max hover:bg-white hover:text-black transition uppercase tracking-widest text-xs font-bold">Join Sunday Gathering</a>
@@ -195,23 +129,20 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div class="space-y-6">
                     <p class="text-xl md:text-2xl font-light leading-relaxed">
-                        The idea for Union started with dreaming-out-loud conversations between Mike Baughman, Neil Moseley and Phil Dieke. Eventually the idea developed into a concept and a reality.
+                        The idea for Union started with dreaming-out-loud conversations between Mike Baughman, Neil Moseley and Phil Dieke.
                     </p>
                     <p class="text-white/70 leading-relaxed">
-                        The North Texas Annual Conference of the United Methodist Church launched Union as a laboratory and new church start to experiment with three key things:
+                        Launched as a laboratory and new church start to experiment with three key things:
                     </p>
                     <ul class="space-y-4 text-white/70 border-l border-[var(--gold)] pl-6 italic">
-                        <li>1) What could the church learn from a neighborhood by so embedding itself within the neighborhood that people would actually notice if they closed?</li>
-                        <li>2) What are alternative means of sustaining good work?</li>
-                        <li>3) What might it look like to engage in ministry with young professionals who have left or never engaged the church?</li>
+                        <li>1) Learning by embedding within the neighborhood.</li>
+                        <li>2) Exploring alternative means of sustaining good work.</li>
+                        <li>3) Engaging young professionals who have left the church.</li>
                     </ul>
                 </div>
                 <div class="space-y-6 flex flex-col justify-end">
                     <p class="text-lg leading-relaxed text-white/80">
-                        Since opening in 2012, we’ve developed a top-rated independent coffee shop, three worshipping communities, a long list of arts events and kept the city of Dallas awake with more caffeine than we could measure.
-                    </p>
-                    <p class="font-bold uppercase tracking-widest text-xs border-t border-white/10 pt-6">
-                        We’ve learned a lot along the way and are always happy to share.
+                        Since opening in 2012, we’ve developed a top-rated independent coffee shop and three worshipping communities.
                     </p>
                 </div>
             </div>
@@ -225,11 +156,9 @@
     <script>
         function togglePanel() {
             document.getElementById('accPanel').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('accPanel').classList.contains('open') ? 'hidden' : 'auto';
         }
-
-        function toggleFeature(className) {
-            document.body.classList.toggle(className);
-        }
+        function toggleFeature(className) { document.body.classList.toggle(className); }
     </script>
 </body>
 </html>
