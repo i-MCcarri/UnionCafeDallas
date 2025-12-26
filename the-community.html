@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Community | UNION Dallas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --matte: #121212; 
+            --oat: #f5f5f0; 
+            --text: #f4f4f4;
+            --nav-bg: rgba(18, 18, 18, 0.9);
+        }
+
+        /* Base Accessibility Logic */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--matte); 
+            color: var(--text); 
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Theme Overrides */
+        body.light-mode {
+            --matte: #ffffff;
+            --text: #1a1a1a;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+        }
+        body.light-mode .glass { background: rgba(0, 0, 0, 0.05); }
+        body.light-mode .text-gray-400 { color: #4a4a4a; }
+
+        body.high-contrast {
+            --matte: #000000;
+            --text: #ffffff;
+            --gold: #ffff00;
+        }
+        body.high-contrast .bg-white { background-color: #000000 !important; color: #ffffff !important; border: 2px solid white; }
+        body.high-contrast .text-black { color: #ffffff !important; }
+        body.high-contrast button { border: 2px solid var(--gold) !important; }
+
+        body.readable-font {
+            line-height: 1.8 !important;
+            letter-spacing: 0.05rem !important;
+        }
+        body.readable-font .serif {
+            font-family: 'Inter', sans-serif !important;
+            font-style: normal !important;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Utility Styles */
+        .serif { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        /* Script Logo Styling */
+        .nav-logo-script {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.05em;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .community-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); }
+        
+        .accessibility-panel { 
+            transform: translateX(100%); 
+            transition: transform 0.3s ease-in-out; 
+        }
+        .accessibility-panel.open { transform: translateX(0); }
+    </style>
+</head>
+<body id="main-body">
+
+    <button onclick="togglePanel()" class="fixed bottom-6 right-6 z-[100] bg-[#D4AF37] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs" aria-label="Accessibility Options">
+        <span>⚙️ Accessibility</span>
+    </button>
+
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-72 bg-neutral-900 border-l border-white/20 z-[90] p-8 shadow-2xl text-white">
+        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
+        <div class="space-y-6">
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">Light Mode</span>
+                <input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">High Contrast</span>
+                <input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">Better Reading</span>
+                <input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5">
+            </label>
+        </div>
+        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close Menu</button>
+    </div>
+
+    <nav class="p-6 flex justify-between items-center border-b border-white/10 sticky top-0 bg-[var(--nav-bg)] z-50">
+        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span style="color:var(--gold)">DTX</span></a>
+        <div class="space-x-6 text-xs uppercase tracking-widest">
+            <a href="the-feed.html" class="text-xl font-bold tracking-tighter uppercase" style="color:var(--gold)">[◉"]</a>
+            <a href="the-coffee.html" class="text-gray-500 hover:text-white transition">The Coffee</a>
+            <a href="the-community.html" class="text-[var(--gold)] font-bold">The Community</a>
+            <a href="the-cause.html" class="text-gray-500 hover:text-white transition">The Cause</a>
+            <a href="visit-sunday.html" class="bg-white text-black px-4 py-2 rounded-sm font-bold">Visit Sunday</a>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-6 py-20 text-center">
+        <h6 class="uppercase tracking-[.25em] text-xs mb-4 text-[var(--gold)]">Broken Bread & Bold Questions</h6>
+        <h1 class="text-5xl md:text-7xl font-light mb-8">A Sanctuary for <br><span class="serif italic">The Rest of Us.</span></h1>
+        <p class="max-w-2xl mx-auto text-gray-400 text-lg leading-relaxed">
+            Union isn't a building; it's a movement of people in Dallas who believe that doubt is holy, coffee is a catalyst, and everyone belongs.
+        </p>
+    </header>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-1 border-y border-white/10">
+        <div class="p-16 border-r border-white/10 text-center group transition-colors">
+            <div class="text-3xl mb-4">🕯️</div>
+            <h3 class="text-xl font-bold mb-2 uppercase tracking-tight">Worship</h3>
+            <p class="text-sm text-gray-500">Sundays at 10:00 AM. Liturgy that breathes and music that moves.</p>
+        </div>
+        <div class="p-16 border-r border-white/10 text-center group transition-colors">
+            <div class="text-3xl mb-4">🤝</div>
+            <h3 class="text-xl font-bold mb-2 uppercase tracking-tight">Covenants</h3>
+            <p class="text-sm text-gray-500">Small groups where we practice radical honesty and mutual care.</p>
+        </div>
+        <div class="p-16 text-center group transition-colors">
+            <div class="text-3xl mb-4">⚖️</div>
+            <h3 class="text-xl font-bold mb-2 uppercase tracking-tight">Justice</h3>
+            <p class="text-sm text-gray-500">Direct action to support our neighbors in Oak Lawn and beyond.</p>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-24">
+        <h2 class="text-3xl serif italic mb-12">Life Together</h2>
+        <div class="columns-1 md:columns-3 gap-6 space-y-6">
+            
+            <div class="glass p-1 rounded-sm overflow-hidden border border-white/5 break-inside-avoid">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800" class="w-full grayscale hover:grayscale-0 transition duration-500" alt="Community Meal">
+                <div class="p-6">
+                    <h4 class="font-bold uppercase tracking-tight">The Tuesday Table</h4>
+                    <p class="text-xs text-gray-500 mt-2 italic">"I came for the coffee, I stayed because I was finally seen." — Maria</p>
+                </div>
+            </div>
+
+            <div class="glass p-1 rounded-sm overflow-hidden border border-white/5 break-inside-avoid">
+                
+                <img src="https://www.health.com/thmb/_OROACJ0XErI7GVEAPUc3QZPLOM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/intersex-progress-pride-fb46a844b53b4310b318370135239484.png" class="w-full h-48 object-cover grayscale hover:grayscale-0 transition duration-500" alt="Vibrant Pride Flag">
+                <div class="p-6">
+                    <h4 class="font-bold uppercase tracking-tight">Our Queer Presence</h4>
+                    <p class="mt-2 text-sm leading-relaxed text-gray-400">We are an intentionally inclusive space. LGBTQ+ leadership is not just accepted; it is celebrated here.</p>
+                </div>
+            </div>
+
+            <div class="glass p-1 rounded-sm overflow-hidden border border-white/5 break-inside-avoid">
+                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800" class="w-full grayscale hover:grayscale-0 transition duration-500" alt="Group Meeting">
+                <div class="p-6">
+                    <h4 class="font-bold uppercase tracking-tight">Theology on Tap</h4>
+                    <p class="text-xs text-gray-500 mt-2 italic">Real questions. Real beer. No easy answers.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="bg-[#3C4852] py-24 text-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-xs uppercase tracking-[.4em] font-bold mb-12 opacity-70">Equity in Justice</h2>
+            
+            <div class="space-y-8">
+                <p class="text-3xl md:text-4xl font-light leading-tight serif italic">
+                    "Recognizing where we fall short is the first step toward true sanctuary."
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
+                    <div class="space-y-4 text-gray-300 leading-relaxed">
+                        <p>
+                            At Union, we’ve worked hard to become a place of Sanctuary for the LGBTQ+ community. However, we have fallen short in providing the same for people of color, as is evident in the lack of diversity within our worshipping community.
+                        </p>
+                        <p>
+                            Recognizing this, Union leadership applied and was accepted to participate in <strong>Dallas Truth, Racial Healing and Transformation’s 2022 cohort program</strong>. This cohort was extensive and thorough in education, coaching and practical implementation.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-black/20 p-8 border-l-2 border-[var(--gold)]">
+                        <h4 class="text-sm uppercase tracking-widest font-bold mb-6">Current Initiatives</h4>
+                        <ul class="space-y-6">
+                            <li class="flex items-start gap-4">
+                                <span class="text-[var(--gold)] font-bold">01</span>
+                                <div>
+                                    <span class="block font-bold">Racial Equity Policy</span>
+                                    <span class="text-xs text-gray-400">Codifying our commitment to anti-racism in every level of leadership.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="text-[var(--gold)] font-bold">02</span>
+                                <div>
+                                    <span class="block font-bold">Theory of Change</span>
+                                    <span class="text-xs text-gray-400">Mapping the long-term impact we aim to have on racial justice in Dallas.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pt-12 border-t border-white/10 text-center">
+                    <p class="text-sm italic opacity-60">While both of these are still a work in progress, we wanted to share the progress we’ve been making.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-gray-600 text-xs tracking-widest uppercase border-t border-white/5">
+        <p>© 2025 Union Dallas. Brewed for the Common Good.</p>
+    </footer>
+
+    <script>
+        function togglePanel() {
+            document.getElementById('accPanel').classList.toggle('open');
+        }
+
+        function toggleFeature(className) {
+            document.body.classList.toggle(className);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Coffee | UNION Dallas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --bg: #121212; 
+            --text: #f4f4f4; 
+            --card: #1a1a1a;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .serif { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        /* Script Logo Styling */
+        .nav-logo-script {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.05em;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .coffee-gradient { 
+            background: linear-gradient(180deg, rgba(18,18,18,0) 0%, rgba(18,18,18,1) 100%); 
+        }
+        
+        /* Accessibility Panel Styling */
+        .accessibility-panel { 
+            transform: translateX(100%); 
+            transition: transform 0.3s ease-in-out; 
+        }
+        .accessibility-panel.open { transform: translateX(0); }
+
+        /* THEME OVERRIDES */
+        
+        /* 1. Light Mode */
+        body.light-mode {
+            --bg: #fcfcf9;
+            --text: #1a1a1a;
+            --card: #ffffff;
+        }
+        body.light-mode .bg-neutral-900, 
+        body.light-mode .bg-[#1a1a1a] { 
+            background-color: var(--card); 
+            border: 1px solid #e5e5e5; 
+        }
+
+        /* 2. High Contrast */
+        body.high-contrast {
+            --bg: #000000;
+            --text: #ffffff;
+            --gold: #ffff00;
+        }
+
+        body.high-contrast .product-card { 
+            border: 2px solid white !important; 
+        }
+
+        body.high-contrast .bg-[#D4AF37] { 
+            background-color: #ffff00 !important; 
+        }
+
+        /* 3. Enhanced Reading (Accessibility) */
+        body.readable-font {
+            line-height: 1.8 !important;
+            letter-spacing: 0.05rem !important;
+            word-spacing: 0.1rem !important;
+        }
+
+        body.readable-font .serif {
+            font-family: 'Inter', sans-serif !important;
+            font-style: normal !important;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body id="main-content">
+
+    <button onclick="togglePanel()" class="fixed bottom-6 right-6 z-[100] bg-[#D4AF37] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs" aria-label="Accessibility Options">
+        <span>⚙️ Accessibility</span>
+    </button>
+
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-72 bg-neutral-900 border-l border-white/20 z-[90] p-8 shadow-2xl text-white">
+        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
+        <div class="space-y-6">
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">Light Mode</span>
+                <input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">High Contrast</span>
+                <input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">Better Reading</span>
+                <input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5">
+            </label>
+        </div>
+        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close Menu</button>
+    </div>
+
+    <nav class="p-6 flex justify-between items-center border-b border-white/10">
+        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span> <span style="color:var(--gold)">DTX</span></a>
+        <div class="space-x-6 text-xs uppercase tracking-widest">
+            <a href="explore-the-menu.html" class="text-[var(--gold)] font-bold">Explore Full Menu</a>
+            <a href="the-coffee.html" class="text-[var(--gold)] font-bold">The Coffee</a>
+            <a href="the-community.html" class="text-gray-500 hover:text-white transition">The Community</a>
+            <a href="the-cause.html" class="text-gray-500 hover:text-white transition ">The Cause</a>
+        </div>
+    </nav>
+
+    <header class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2000" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Coffee Pour Over">
+        <div class="relative text-center z-10 px-6">
+            <h1 class="text-6xl md:text-8xl font-light mb-4">The <span class="serif italic">Coffee</span></h1>
+            <p class="text-xl tracking-widest uppercase text-[#D4AF37]">Sourced for Justice. Roasted for Taste.</p>
+        </div>
+        <div class="absolute inset-0 coffee-gradient"></div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-3xl font-bold">Current Roasts</h2>
+                <p class="text-gray-500">Seasonal selections from our partners.</p>
+            </div>
+            <div class="flex gap-4">
+                <a href="the-feed.html" class="text-xl font-bold tracking-tighter uppercase" style="color:var(--gold)">[◉"]</a>
+                <a href="https://www.uniondallas.org/room-reservation" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase bg-[#ffffff] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">Reservations</a>
+                <a href="explore-the-menu.html" class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter bg-[#D4AF37] text-black p-4 shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold">Explore Full Menu</a>
+                <span class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter">Direct Trade</span>
+                <span class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter">Single Origin</span>
+                <span class="text-xs border border-white/20 px-3 py-1 rounded-full uppercase tracking-tighter">Whole Bean</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="product-card group cursor-pointer">
+                <div class="relative overflow-hidden bg-neutral-900 aspect-[4/5] rounded-sm flex items-center justify-center p-12 transition-colors">
+                    <div class="absolute top-4 left-4 bg-[#D4AF37] text-black text-[10px] font-bold px-2 py-1 uppercase">Best Seller</div>
+                    <div class="w-full h-full border border-dashed border-white/10 flex items-center justify-center italic text-gray-600"><img src="assets/images/Onyx-Monarch.jpeg"></div>
+                </div>
+                <div class="mt-6 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-medium">Onyx | Dark Roast<br>Monarch Espresso </h3>
+                        <p class="text-sm text-gray-500">Dark Chocolate • Molasses • Red Wine • Berries </p>
+                    </div>
+                    <span class="text-[#D4AF37] font-bold">$19.50</span>
+                </div>
+            </div>
+
+            <div class="product-card group cursor-pointer">
+                <div class="relative overflow-hidden bg-neutral-900 aspect-[4/5] rounded-sm flex items-center justify-center p-12 transition-colors">
+                    <div class="w-full h-full border border-dashed border-white/10 flex items-center justify-center italic text-gray-600"><img src="assets/images/Onyx-CB.jpeg"></div>
+                </div>
+                <div class="mt-6 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-medium">Onyx | Medium Roast<br>Cold Brew</h3>
+                        <p class="text-sm text-gray-500">Cocoa • Dates • Brown Sugar • Stone Fruit</p>
+                    </div>
+                    <span class="text-[#D4AF37] font-bold">$21.00</span>
+                </div>
+            </div>
+
+            <div class="product-card group cursor-pointer">
+                <div class="relative overflow-hidden bg-neutral-900 aspect-[4/5] rounded-sm flex items-center justify-center p-12 transition-colors">
+                    <div class="w-full h-full border border-dashed border-white/10 flex items-center justify-center italic text-gray-600"><img src="assets/images/Onyx-SW.jpeg"></div>
+                </div>
+                <div class="mt-6 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-medium">Onyx | Medium Roast<br>Southern Weather Drip</h3>
+                        <p class="text-sm text-gray-500">Milk Chocolate • Plum • Candied Walnuts • Citrus</p>
+                    </div>
+                    <span class="text-[#D4AF37] font-bold">$19.00</span>
+                </div>
+            </div>
+
+            <div class="product-card group cursor-pointer">
+                <div class="relative overflow-hidden bg-neutral-900 aspect-[4/5] rounded-sm flex items-center justify-center p-12 transition-colors">
+                    <div class="w-full h-full border border-dashed border-white/10 flex items-center justify-center italic text-gray-600"><img src="assets/images/Onyx-Eclipse.jpeg"></div>
+                </div>
+                <div class="mt-6 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-medium">Onyx | Dark Roast<br>Eclipse Drip</h3>
+                        <p class="text-sm text-gray-500">Baker's Chocolate • Burnt Sugar • Smoked Vanilla Bean</p>
+                    </div>
+                    <span class="text-[#D4AF37] font-bold">$22.00</span>
+                </div>
+            </div>
+
+            <div class="product-card group cursor-pointer">
+                <div class="relative overflow-hidden bg-neutral-900 aspect-[4/5] rounded-sm flex items-center justify-center p-12 transition-colors">
+                    <div class="absolute top-4 left-4 bg-[#D4AF37] text-black text-[10px] font-bold px-2 py-1 uppercase">Holiday</div>
+                    <div class="w-full h-full border border-dashed border-white/10 flex items-center justify-center italic text-gray-600"><img src="assets/images/Onyx-Fra_Kram.jpg"></div>
+                </div>
+                <div class="mt-6 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-medium">Onyx | Medium + Dark Roast<br>Framily + Krampus</h3>
+                        <p class="text-sm text-gray-500"> Peach • Earl Grey • Milk Chocolate • Berries<br>Grapefruit • Chocolate Cake • Spice • Viscous</p>
+                    </div>
+                    <span class="text-[#D4AF37] font-bold">$19.50</span>
+                </div>
+            </div>
+
+            <div class="product-card group cursor-pointer">
+                <div class="relative overflow-hidden bg-neutral-900 aspect-[4/5] rounded-sm flex items-center justify-center p-12 transition-colors">
+                    <div class="w-full h-full border border-dashed border-white/10 flex items-center justify-center italic text-gray-600"><img src="assets/images/Onyx-Geometry.jpeg"></div>
+                </div>
+                <div class="mt-6 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-medium">Onyx | Light Roast<br>Geometry Drip</h3>
+                        <p class="text-sm text-gray-500">Berries • Stone Fruit • Earl Grey • Honeysuckle</p>
+                    </div>
+                    <span class="text-[#D4AF37] font-bold">$21.00</span>
+                </div>
+            </div>
+
+            <div class="product-card group cursor-pointer">
+                <div class="relative overflow-hidden bg-neutral-900 aspect-[4/5] rounded-sm flex items-center justify-center p-12 transition-colors">
+                    <div class="w-full h-full border border-dashed border-white/10 flex items-center justify-center italic text-gray-600"><img src="assets/images/Onyx-Tropical_Weather.jpeg"></div>
+                </div>
+                <div class="mt-6 flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-medium">Onyx | Light Roast<br>Tropical Weather</h3>
+                        <p class="text-sm text-gray-500">Mixed Berries • Sweet Tea • Raw Honey • Plum</p>
+                    </div>
+                    <span class="text-[#D4AF37] font-bold">$20.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-gray-600 text-xs tracking-widest uppercase border-t border-white/5">
+        <p>© 2025 Union Dallas. Brewed for the Common Good.</p>
+    </footer>
+
+    <script>
+        function togglePanel() {
+            const panel = document.getElementById('accPanel');
+            panel.classList.toggle('open');
+        }
+
+        function toggleFeature(className) {
+            document.body.classList.toggle(className);
+        }
+    </script>
+</body>
+</html>

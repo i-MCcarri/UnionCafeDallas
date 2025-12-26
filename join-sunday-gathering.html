@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Sunday Gathering | UNION Dallas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --bg: #121212; 
+            --text: #f4f4f4; 
+            --card: #1a1a1a;
+            --line: rgba(255,255,255,0.1);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            transition: background-color 0.3s, color 0.3s;
+            scroll-behavior: smooth;
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        /* Script Logo Styling */
+        .nav-logo-script {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.05em;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        /* Accessibility Panel Styling */
+        .accessibility-panel { 
+            transform: translateX(100%); 
+            transition: transform 0.3s ease-in-out; 
+        }
+        .accessibility-panel.open { transform: translateX(0); }
+
+        /* THEME OVERRIDES */
+        
+        /* 1. Light Mode */
+        body.light-mode {
+            --bg: #fcfcf9;
+            --text: #1a1a1a;
+            --card: #ffffff;
+            --line: rgba(0,0,0,0.1);
+        }
+
+        /* 2. High Contrast */
+        body.high-contrast {
+            --bg: #000000;
+            --text: #ffffff;
+            --gold: #ffff00;
+        }
+        body.high-contrast .info-card { border: 2px solid white !important; }
+        body.high-contrast button { border: 2px solid var(--gold) !important; background: black !important; color: var(--gold) !important; }
+
+        /* 3. Enhanced Reading (Accessibility) */
+        body.readable-font {
+            line-height: 1.8 !important;
+            letter-spacing: 0.05rem !important;
+        }
+        body.readable-font .serif {
+            font-family: 'Inter', sans-serif !important;
+            font-style: normal !important;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body id="main-content">
+
+    <button onclick="togglePanel()" class="fixed bottom-6 right-6 z-[100] bg-[#D4AF37] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs" aria-label="Accessibility Options">
+        <span>⚙️ Accessibility</span>
+    </button>
+
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-72 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white">
+        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
+        <div class="space-y-6">
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">Light Mode</span>
+                <input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">High Contrast</span>
+                <input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">Better Reading</span>
+                <input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5">
+            </label>
+        </div>
+        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close</button>
+    </div>
+
+    <nav class="p-6 flex justify-between items-center border-b border-[var(--line)] sticky top-0 bg-[var(--bg)] z-50">
+        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span style="color:var(--gold)">DAL</span></a>
+        <div class="space-x-6 text-xs uppercase tracking-widest">
+            <a href="the-coffee.html" class="text-gray-500 hover:text-[var(--text)] transition">The Coffee</a>
+            <a href="the-community.html" class="text-gray-500 hover:text-[var(--text)] transition">The Community</a>
+            <a href="#plan" class="bg-[var(--gold)] text-black px-4 py-2 font-bold rounded-sm">Plan Your Visit</a>
+        </div>
+    </nav>
+
+    <header class="max-w-4xl mx-auto px-6 py-24 text-center">
+        <h1 class="text-5xl md:text-7xl font-light mb-6">Sunday <span class="serif italic">Gatherings</span></h1>
+        <p class="text-xl text-gray-400 mb-8 italic">"A sanctuary for the rest of us."</p>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6 text-sm uppercase tracking-widest font-bold">
+            <div class="flex items-center gap-2"><span>🕒</span> 10:00 AM</div>
+            <div class="hidden md:block text-gray-600">|</div>
+            <div class="flex items-center gap-2"><span>📍</span> 3705 Cedar Springs Rd</div>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-[var(--line)]">
+        <div class="info-card p-8 bg-[var(--card)] border-l-4 border-[var(--gold)]">
+            <h3 class="font-bold uppercase text-sm tracking-widest mb-4">Parking</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Free parking is located in the garage directly behind the building. Entrance is on Dickason Ave.</p>
+        </div>
+        <div class="info-card p-8 bg-[var(--card)] border-l-4 border-[var(--gold)]">
+            <h3 class="font-bold uppercase text-sm tracking-widest mb-4">The Vibe</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Casual and comfortable. Wear what makes you feel like yourself.</p>
+        </div>
+        <div class="info-card p-8 bg-[var(--card)] border-l-4 border-[var(--gold)]">
+            <h3 class="font-bold uppercase text-sm tracking-widest mb-4">Union Kids</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Safe, inclusive programming for children meets during the service.</p>
+        </div>
+    </section>
+
+    <section class="bg-[var(--card)] py-20 border-y border-[var(--line)]">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-3xl serif italic mb-8">What to Expect</h2>
+            <div class="space-y-6 text-left">
+                <details class="group border-b border-[var(--line)] pb-4">
+                    <summary class="list-none font-bold uppercase text-xs tracking-widest cursor-pointer flex justify-between items-center">
+                        Is it a traditional church service?
+                        <span class="group-open:rotate-180 transition-transform">↓</span>
+                    </summary>
+                    <p class="text-sm text-gray-400 mt-4 leading-relaxed">Not exactly. We use liturgy that breathes, music that moves, and we value questions over easy answers.</p>
+                </details>
+                <details class="group border-b border-[var(--line)] pb-4">
+                    <summary class="list-none font-bold uppercase text-xs tracking-widest cursor-pointer flex justify-between items-center">
+                        Is there coffee?
+                        <span class="group-open:rotate-180 transition-transform">↓</span>
+                    </summary>
+                    <p class="text-sm text-gray-400 mt-4 leading-relaxed">Yes. We provide free drip coffee during the gathering, and the full bar is open for sales before and after.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section id="plan" class="max-w-2xl mx-auto px-6 py-24">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl serif italic mb-4">Let us know you're coming</h2>
+            <p class="text-gray-500">We'll have a host meet you at the door and buy your first drink from the bar.</p>
+        </div>
+        <form class="space-y-6">
+            <input type="text" placeholder="Your Name" class="w-full bg-[var(--bg)] border border-[var(--line)] p-4 outline-none focus:border-[var(--gold)] transition">
+            <input type="email" placeholder="Email Address" class="w-full bg-[var(--bg)] border border-[var(--line)] p-4 outline-none focus:border-[var(--gold)] transition">
+            <button class="w-full bg-[var(--text)] text-[var(--bg)] font-bold py-5 uppercase tracking-widest hover:bg-[var(--gold)] hover:text-black transition">I'll be there</button>
+        </form>
+    </section>
+
+    <footer class="py-12 text-center text-gray-600 text-xs tracking-widest uppercase border-t border-[var(--line)]">
+        <p>© 2025 Union Dallas. Sourced for Justice.</p>
+    </footer>
+
+    <script>
+        function togglePanel() {
+            document.getElementById('accPanel').classList.toggle('open');
+        }
+
+        function toggleFeature(className) {
+            document.body.classList.toggle(className);
+        }
+    </script>
+</body>
+</html>

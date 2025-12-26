@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore The Menu | UNION Dallas Coffee</title> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --bg: #121212; 
+            --text: #f4f4f4; 
+            --card: #1a1a1a;
+            --line: rgba(255,255,255,0.1);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            transition: all 0.3s ease; 
+        }
+
+        .serif { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        /* Script Logo Styling */
+        .nav-logo-script {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.05em;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .highlight {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* Hero Image Container Styling */
+        .hero-container {
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        /* Interactive Hover States */
+        .menu-item { 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            padding: 1.5rem; 
+            margin: -1.5rem; 
+            border-radius: 8px;
+        }
+        .menu-item:hover { 
+            background: rgba(212, 175, 55, 0.1); 
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .menu-item:hover h3 { color: var(--gold); }
+
+        /* Modal & Cart Panel Logic */
+        .panel-slide { 
+            transform: translateX(100%); 
+            transition: transform 0.4s ease; 
+        }
+
+        .panel-slide.open { 
+            transform: translateX(0); 
+        }
+
+        .modal-bg { 
+            display: none; 
+            background: rgba(0,0,0,0.85); 
+            backdrop-filter: blur(4px); 
+            z-index: 1000; 
+        }
+
+        .modal-bg.active { 
+            display: flex; 
+        }
+
+        /* Accessibility Overrides */
+        body.light-mode { 
+            --bg: #fdfdfb; 
+            --text: #1a1a1a; 
+            --card: #ffffff; 
+            --line: rgba(0,0,0,0.1); 
+        }
+
+        body.high-contrast { 
+            --bg: #000000; 
+            --text: #ffffff; 
+            --gold: #ffff00; 
+            --card: #000000; 
+            --line: #ffffff; 
+        }
+
+        body.readable-font { 
+            font-family: system-ui, sans-serif !important; 
+            line-height: 1.8; 
+            letter-spacing: 0.02em; 
+        }
+
+        .accessibility-panel { 
+            transform: translateX(100%); 
+            transition: transform 0.3s ease; 
+        }
+
+        .accessibility-panel.open { transform: translateX(0); }
+        
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        .category-header { 
+            border-bottom: 1px solid var(--gold); 
+            margin-bottom: 2rem; 
+            padding-bottom: 0.5rem; 
+        }
+
+    </style>
+</head>
+<body id="mainBody" class="overflow-x-hidden">
+
+    <button onclick="togglePanel('accPanel')" class="fixed bottom-6 right-6 z-[100] bg-[var(--gold)] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs">
+        <span>⚙️ Accessibility</span>
+    </button>
+
+    <div id="globalOverlay" class="modal-bg fixed inset-0 items-center justify-center p-6" onclick="closePopups()">
+        <div class="bg-neutral-900 border border-white/10 w-full max-w-lg p-10 relative" onclick="event.stopPropagation()">
+            <button onclick="closePopups()" class="absolute top-4 right-4 text-white/50 hover:text-white uppercase text-[10px] tracking-widest">Close</button>
+            <div id="modalBody">
+                </div>
+            <div class="mt-10 pt-6 border-t border-white/10">
+                <button id="addToOrderBtn" class="w-full bg-[var(--gold)] text-black py-4 font-bold uppercase text-xs tracking-[.2em] hover:brightness-110">Add to Order</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartPanel" class="panel-slide fixed top-0 right-0 h-full w-full md:w-96 bg-neutral-900 border-l border-white/20 z-[1100] p-8 flex flex-col shadow-2xl">
+        <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+            <h2 class="text-xl font-bold uppercase tracking-widest">Your Cart</h2>
+            <button onclick="togglePanel('cartPanel')" class="text-xs opacity-50 hover:opacity-100 uppercase tracking-widest">Close</button>
+        </div>
+        <div id="cartContent" class="flex-grow space-y-6 overflow-y-auto">
+            <p class="text-gray-500 italic">Your cart is currently empty.</p>
+        </div>
+        <div class="pt-8 border-t border-white/10">
+            <div class="flex justify-between text-lg font-bold mb-6">
+                <span>Total</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="w-full bg-white text-black py-4 font-bold uppercase text-xs tracking-[.2em] hover:bg-[var(--gold)] transition">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-80 bg-neutral-900 border-l border-white/20 p-8 text-white">
+        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Menu Settings</h2>
+        <div class="space-y-6">
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Light Mode</span><input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">High Contrast</span><input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Readable Font</span><input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5"></label>
+        </div>
+        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close</button>
+    </div>
+
+    <nav class="p-6 flex justify-between items-center fixed top-0 w-full bg-[var(--bg)]/90 backdrop-blur-md z-50 border-b border-white/10">
+        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span class="text-[var(--gold)]">DAL</span></a>
+        <div class="flex items-center gap-8">
+            <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold">
+                <a href="the-coffee.html" class="text-[var(--gold)]">The Coffee</a>
+                <a href="the-community.html" class="hover:text-[var(--gold)] transition">The Community</a>
+                <a href="the-cause.html" class="hover:text-[var(--gold)] transition">The Cause</a>
+            </div>
+            <button onclick="togglePanel('cartPanel')" class="relative">
+                <span class="text-xs font-bold uppercase tracking-widest">Cart</span>
+                <span id="cartBadge" class="absolute -top-3 -right-4 bg-[var(--gold)] text-black text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="hero-container pt-20">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070" alt="Specialty Coffee Spread" class="hero-image">
+    </div>
+
+    <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+        <header class="mb-20 text-center md:text-left">
+            <h1 class="text-6xl md:text-8xl font-light tracking-tighter mb-4">The <span class="serif italic">Menu.</span></h1>
+            <div class="h-1 w-20 bg-[var(--gold)] mb-6 mx-auto md:mx-0"></div>
+            <p class="text-gray-400 uppercase tracking-[0.4em] text-xs max-w-xl">Sourced for Justice. Brewed for the Neighbor. Explore our curated selection of Onyx roasts and seasonal induldgences.</p>
+        </header>
+
+        <section class="mb-24">
+            <div class="category-header"><h2 class="text-2xl font-bold uppercase tracking-widest"><span class="serif italic">Winter</span> Sips</h2><p class="text-xs italic text-gray-500">Seasonal flavors + indulgences to unite the spirit</p></div>
+            <div class="menu-grid">
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Son of A Nutmeg</span><span>$7.50 - $8.25</span></div>
+                    <p class="text-xs text-gray-400">Buddy the Elf approved! Vanilla, eggnog*, + nutmeg magic. (*Lactaid Egg Nog: lactose-free, contains dairy)</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Snowy Mint Mocha</span><span>$7.50 - $8.25</span></div>
+                    <p class="text-xs text-gray-400">Peppermint, white mocha, + espresso under whipped cream + crushed peppermint.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>The Nutcracker</span><span>$7.50 - $8.25</span></div>
+                    <p class="text-xs text-gray-400">Caramel, pistachio, + cookie butter dance with espresso + cold foam.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Snickerdoodle Sleigh Ride</span><span>$7.50 - $8.25</span></div>
+                    <p class="text-xs text-gray-400">Espresso, white mocha, + cinnamon-vanilla goodness. A cookie-lover's dream.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Matcha La-La-La</span><span>$8.00 - $9.00</span></div>
+                    <p class="text-xs text-gray-400">Festive orange + cranberry swirl into bright matcha. Like singing carols in a cup.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Winter In Paris</span><span>$6.00 - $7.00</span></div>
+                    <p class="text-xs text-gray-400">French vanilla + Paris Tea come together for a soft, elegant escape.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="category-header"><h2 class="text-2xl font-bold uppercase tracking-widest"><span class="serif italic">Classic </span> Coffee</h2><p class="text-xs italic text-gray-500">Onyx Coffee Lab Roasts</p></div>
+            <div class="menu-grid">
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Americano</span><span>$4.50 - $5.25</span></div>
+                    <p class="text-xs text-gray-400">Dark Chocolate + Molasses Espresso with berry wine notes. Try hot oriced as well!</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Cappuccino</span><span>$4.75</span></div>
+                    <p class="text-xs text-gray-400">Classic 6oz milk + 2oz espresso preparations.</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Cold Brew</span><span>$1.00 - $5.75</span></div>
+                    <p class="text-xs text-gray-400">Brewed 24 hours in-shop. Incredibly smooth.</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Cortado</span><span>$4.25</span></div>
+                    <p class="text-xs text-gray-400">Espresso-forward drink with a touch of milk foam.</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Drip Coffee</span><span>$3.75 - $4.00</span></div>
+                    <p class="text-xs text-gray-400">Onyx Southern Weather blend. Milk chocolate, plum, + citrus notes.</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Espresso</span><span>$4.00</span></div>
+                    <p class="text-xs text-gray-400">Monarch by Onyx. Dark chocolate, molasses, + red wine notes.</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Flat White / Cap</span><span>$4.75</span></div>
+                    <p class="text-xs text-gray-400">Classic 5oz steamer + 2oz espresso preparation.</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Latte</span><span>$5.75 - $6.50</span></div>
+                    <p class="text-xs text-gray-400">Double espresso with silky steamed milk. Hot or iced.</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Macchiato</span><span>$4.50</span></div>
+                    <p class="text-xs text-gray-400">Espresso-forward drinks with a touch of milk + foam.</p>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Mocha Latte</span><span>$6.00 - $6.75</span></div>
+                    <p class="text-xs text-gray-400">Espresso, chocolate + steamed milk..</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="category-header"><h2 class="text-2xl font-bold uppercase tracking-widest"><span class="serif italic">Union </span> Faves</h2><p class="text-xs italic text-gray-500">Most Popular Drinks at Union!</p></div>
+            <div class="menu-grid">
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Butter Bliss</span><span>$6.00 - $6.50</span></div>
+                    <p class="text-xs text-gray-400">Butterscotch, caramel, + vanilla topped with sweet cold foam.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Creme Brulee Latte</span><span>$6.00 - $6.50</span></div>
+                    <p class="text-xs text-gray-400">Latte with caramel + french vanilla, just like the classic dessert!</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>The Flower Child</span><span>$6.00 - $6.50</span></div>
+                    <p class="text-xs text-gray-400">An iced rose + lavender latte. Light + refreshing.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Frosty Toddy</span><span>$5.75 - $6.25</span></div>
+                    <p class="text-xs text-gray-400">Our signature frozen cold brew blend. Refreshingly frothy.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Matcha Mint</span><span>$5.75 - $6.25</span></div>
+                    <p class="text-xs text-gray-400">A Union favorite. Green tea matcha base with your choice of milk + a dash of peppermint. Try it hot, iced, or blended!</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Spicy Mocha</span><span>$6.00 - $6.50</span></div>
+                    <p class="text-xs text-gray-400">A spicy mocha latte with a little cayenne + cinnamon!</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Strawberry Fields Matcha</span><span>$5.75 - $6.25</span></div>
+                    <p class="text-xs text-gray-400">Sweet strawberries, earthy matcha, + vanilla with strawberry cold foam.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Sweater Weather</span><span>$6.00 - $6.50</span></div>
+                    <p class="text-xs text-gray-400">The legendary cinnamon maple latte. Fall in a cup, all year long.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="category-header"><h2 class="text-2xl font-bold uppercase tracking-widest">Tea <span class="serif italic"> & More</span></h2></div>
+            <div class="menu-grid">
+                <div class="space-y-1"><div class="flex justify-between font-bold"><span>Chai Latte</span><span>$5.25 - $6.00</span></div></div>
+                <div class="space-y-1"><div class="flex justify-between font-bold"><span>Hot Chocolate</span><span>$3.50 - $3.75</span></div></div>
+                <div class="space-y-1"><div class="flex justify-between font-bold"><span>Hot Tea</span><span>$3.25 - $4.00</span></div></div>
+                <div class="space-y-1"><div class="flex justify-between font-bold"><span>Iced Tea</span><span>$3.25 - $4.00</span></div></div>
+                <div class="space-y-1"><div class="flex justify-between font-bold"><span>Lemonade</span><span>$1.00 - $4.00</span></div></div>
+                <div class="space-y-1"><div class="flex justify-between font-bold"><span>Matcha Latte</span><span>$5.00 - $5.50</span></div></div>
+                <div class="space-y-1"><div class="flex justify-between font-bold"><span>Coke</span><span>$3.25</span></div></div>
+                <div class="space-y-1"><div class="flex justify-between font-bold"><span>Smart Water</span><span>$2.50</span></div></div>
+            </div>
+        </section>
+
+        <section class="mb-24 bg-white/5 p-6 border border-white/10">
+                <h2 class="category-header text-2xl uppercase tracking-widest font-bold">Catering <span class="serif italic"> Menu</span> <span class="highlight">by the Gal</span></h2>
+                <div class="menu-grid">
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Drip Coffee</span><span>$20 - $120</span></div>
+                    <p class="text-xs text-gray-400">Onyx: Medium Roast | Southern Weather | 1 - 5 Gal<br>Notes of Milk Chocolate • Plum • Candied Walnuts • Citrus</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Cold Brew</span><span>$21 - $126</span></div>
+                    <p class="text-xs text-gray-400">Onyx: Medium Roast | Cold Brew | 1 - 5 Gal <br>Notes of Cocoa • Dates • Brown Sugar • Stone Fruit</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Hot/Iced Tea</span><span>$27</span></div>
+                    <p class="text-xs text-gray-400">Rishi Selection.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 text-center text-gray-600 text-[10px] tracking-[.3em] uppercase border-t border-white/5">
+        <p>© 2025 Union Dallas • Every Bean Matters</p>
+    </footer>
+
+    <script>
+        function togglePanel() { document.getElementById('accPanel').classList.toggle('open'); }
+        function toggleFeature(className) { document.body.classList.toggle(className); }
+    </script>
+</body>
+</html>

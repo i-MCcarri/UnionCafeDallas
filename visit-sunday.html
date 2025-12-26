@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Sunday | UNION Dallas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        /* Base Dynamic Theme Variables */
+        :root { 
+            --gold: #D4AF37; 
+            --bg: #121212; 
+            --text: #f4f4f4; 
+            --card: #1a1a1a;
+            --input-bg: rgba(255,255,255,0.05);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            transition: all 0.3s ease; 
+            scroll-behavior: smooth; 
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        .gold-border { border-color: var(--gold); }
+        .input-field { 
+            background: var(--input-bg); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            padding: 1rem; 
+            width: 100%; 
+            outline: none; 
+            transition: 0.3s; 
+            color: var(--text);
+        }
+        .input-field:focus { border-color: var(--gold); }
+
+        /* Navigation glass effect */
+        .nav-blur { 
+            backdrop-filter: blur(10px); 
+            background: rgba(18, 18, 18, 0.8); 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Accessibility Panel Logic */
+        .accessibility-panel { 
+            transform: translateX(100%); 
+            transition: transform 0.3s ease; 
+        }
+        .accessibility-panel.open { transform: translateX(0); }
+
+        /* THEME OVERRIDES */
+        
+        /* 1. Light Mode */
+        body.light-mode { 
+            --bg: #ffffff; 
+            --text: #121212; 
+            --card: #f8f8f8;
+            --input-bg: #f0f0f0;
+        }
+        body.light-mode .nav-blur { background: rgba(255, 255, 255, 0.9); border-bottom: 1px solid #ddd; }
+        body.light-mode .bg-neutral-900, 
+        body.light-mode .bg-neutral-800 { background-color: var(--card); }
+        body.light-mode .input-field { border: 1px solid #ccc; color: #000; }
+
+        /* 2. High Contrast */
+        body.high-contrast { 
+            --bg: #000000; 
+            --text: #ffffff; 
+            --gold: #ffff00;
+        }
+        body.high-contrast button, 
+        body.high-contrast .bg-white { 
+            border: 3px solid var(--gold) !important; 
+            background: black !important; 
+            color: white !important; 
+        }
+        body.high-contrast .gold-border { border-left-width: 8px; border-color: var(--gold); }
+
+        /* 3. Readability (Dyslexia & Low Vision Friendly) */
+        body.readable-font { 
+            font-family: system-ui, -apple-system, sans-serif !important; 
+            line-height: 1.8 !important; 
+            letter-spacing: 0.05rem !important; 
+        }
+        body.readable-font .serif { 
+            font-family: system-ui, sans-serif !important; 
+            font-style: normal !important; 
+            font-weight: 800; 
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body id="page-content">
+
+    <button onclick="togglePanel()" class="fixed bottom-6 right-6 z-[100] bg-[#D4AF37] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs" aria-label="Accessibility Options">
+        <span>⚙️ Accessibility</span>
+    </button>
+
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-72 bg-neutral-900 border-l border-white/20 z-[90] p-8 shadow-2xl text-white">
+        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
+        <div class="space-y-6">
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">Light Mode</span>
+                <input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">High Contrast</span>
+                <input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest">Better Reading</span>
+                <input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5">
+            </label>
+        </div>
+        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close</button>
+    </div>
+
+    <nav class="p-6 flex justify-between items-center sticky top-0 nav-blur z-50 transition-colors">
+        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span style="color:var(--gold)">DAL</span></a>
+        <a href="the-community.html" class="text-xs uppercase tracking-widest text-gray-400 hover:text-white transition">← Back to Community</a>
+    </nav>
+
+    <header class="max-w-4xl mx-auto px-6 py-20 text-center">
+        <h1 class="text-5xl md:text-7xl font-light mb-6">Sunday <span class="serif italic">Gatherings</span></h1>
+        <p class="text-xl text-gray-400">10:00 AM • 3705 Cedar Springs Rd, Dallas</p>
+        <div class="mt-10 flex justify-center gap-4">
+            <a href="#plan" class="bg-[#D4AF37] text-black font-bold px-8 py-4 rounded-sm uppercase text-xs">Plan Your Visit</a>
+            <a href="#faq" class="border border-white/20 px-8 py-4 rounded-sm uppercase text-xs hover:bg-white hover:text-black transition">What to expect</a>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-8 bg-neutral-900 border-l-4 gold-border transition-colors">
+            <h3 class="font-bold uppercase text-sm tracking-widest mb-4">Parking</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Free parking is available in the garage behind the building. Enter via Dickason Ave.</p>
+        </div>
+        <div class="p-8 bg-neutral-900 border-l-4 gold-border transition-colors">
+            <h3 class="font-bold uppercase text-sm tracking-widest mb-4">The Vibe</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Casual. Wear what makes you feel like yourself. Most of us will be in jeans.</p>
+        </div>
+        <div class="p-8 bg-neutral-900 border-l-4 gold-border transition-colors">
+            <h3 class="font-bold uppercase text-sm tracking-widest mb-4">Kids & Youth</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Union Kids meets during the service. Our team provides a safe, inclusive space.</p>
+        </div>
+    </section>
+
+    <section class="w-full h-96 bg-neutral-800 flex items-center justify-center relative transition-colors">
+        <div class="text-center z-10">
+            <span class="text-4xl" aria-hidden="true">📍</span>
+            <h4 class="text-xl font-bold mt-2">Oak Lawn, Dallas</h4>
+            <p class="text-gray-400 text-sm">3705 Cedar Springs Rd, Dallas, TX 75219</p>
+        </div>
+    </section>
+
+    <section id="plan" class="max-w-3xl mx-auto px-6 py-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl serif italic mb-4">Let us buy you a coffee</h2>
+            <p class="text-gray-400">If you let us know you're coming, your first drink is on the house.</p>
+        </div>
+
+        <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="text" placeholder="First Name" class="input-field" aria-label="First Name">
+                <input type="email" placeholder="Email Address" class="input-field" aria-label="Email Address">
+            </div>
+            <select class="input-field" aria-label="Visit Date">
+                <option>Which Sunday are you visiting?</option>
+                <option>This Sunday</option>
+                <option>Next Sunday</option>
+                <option>Just browsing for now</option>
+            </select>
+            <textarea placeholder="Anything we should know? (e.g. accessibility needs, kids' ages, etc.)" rows="4" class="input-field" aria-label="Additional Information"></textarea>
+            <button type="submit" class="w-full bg-white text-black font-bold py-5 uppercase tracking-widest hover:bg-[#D4AF37] transition">I'll see you there</button>
+        </form>
+    </section>
+
+    <section id="faq" class="bg-neutral-900 py-24 transition-colors">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center uppercase tracking-tighter">Common Questions</h2>
+            <div class="space-y-8">
+                <div>
+                    <h4 class="font-bold text-[var(--gold)] mb-2">Do I have to be a Christian?</h4>
+                    <p class="text-gray-400">Absolutely not. Union is home to atheists, agnostics, and seekers alike.</p>
+                </div>
+                <hr class="border-white/10">
+                <div>
+                    <h4 class="font-bold text-[var(--gold)] mb-2">How long is the service?</h4>
+                    <p class="text-gray-400">About 65 minutes. We respect your time and the flow of your morning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center border-t border-white/5">
+        <p class="text-xs text-gray-600 uppercase tracking-widest">We can't wait to meet you.</p>
+    </footer>
+
+    <script>
+        function togglePanel() {
+            document.getElementById('accPanel').classList.toggle('open');
+        }
+
+        function toggleFeature(className) {
+            document.body.classList.toggle(className);
+        }
+    </script>
+</body>
+</html>

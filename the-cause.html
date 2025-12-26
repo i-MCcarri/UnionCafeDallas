@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cause | UNION Dallas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --bg: #121212; 
+            --text: #f4f4f4; 
+            --card: #1a1a1a;
+            --accent: #D4AF37;
+            /* Logo Palette */
+            --terracotta: #D16B3D;
+            --teal: #6BC3B6;
+            --slate: #3C4852;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            transition: all 0.3s ease; 
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        /* Script Logo Styling */
+        .nav-logo-script {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.05em;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        /* Accessibility Panel */
+        .accessibility-panel { transform: translateX(100%); transition: transform 0.3s ease; }
+        .accessibility-panel.open { transform: translateX(0); }
+
+        /* Theme Overrides */
+        body.light-mode { 
+            --bg: #ffffff; 
+            --text: #1a1a1a; 
+            --card: #f4f4f0;
+        }
+
+        body.high-contrast { 
+            --bg: #000000; 
+            --text: #ffffff; 
+            --gold: #ffff00;
+            --accent: #ffff00;
+        }
+        body.high-contrast .value-card { border: 2px solid white !important; }
+
+        body.readable-font { 
+            font-family: system-ui, sans-serif !important; 
+            line-height: 1.8 !important; 
+            letter-spacing: 0.02rem !important;
+        }
+
+        .value-card { border-top: 1px solid var(--slate); padding-top: 1.5rem; }
+    </style>
+</head>
+<body id="mainBody">
+
+    <button onclick="togglePanel()" class="fixed bottom-6 right-6 z-[100] bg-[#D4AF37] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs" aria-label="Accessibility Options">
+        <span>⚙️ Accessibility</span>
+    </button>
+
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-72 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white">
+        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
+        <div class="space-y-6">
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest text-white">Light Mode</span>
+                <input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest text-white">High Contrast</span>
+                <input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest text-white">Reading Focus</span>
+                <input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5">
+            </label>
+        </div>
+        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close</button>
+    </div>
+
+    <nav class="p-6 flex justify-between items-center border-b border-white/10 sticky top-0 bg-[var(--bg)] z-50">
+        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span style="color:var(--gold)">DTX</span></a>
+        <div class="space-x-8 text-xs uppercase tracking-widest">
+            <a href="the-feed.html" class="text-xl font-bold tracking-tighter uppercase" style="color:var(--gold)">[◉"]</a>
+            <a href="the-coffee.html" class="text-gray-500 hover:text-[var(--text)] transition">The Coffee</a>
+            <a href="the-community.html" class="text-gray-500 hover:text-[var(--text)] transition">The Community</a>
+            <a href="the-cause.html" class="text-[var(--gold)] font-bold">The Cause</a>
+            <a href="the-organization.html" class="bg-white text-black px-4 py-2 rounded-sm font-bold">Organization</a>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-6 py-24 text-center">
+        <h1 class="text-5xl md:text-8xl font-light mb-6">Brewing <br><span class="serif italic">Justice.</span></h1>
+    </header>
+
+    <section class="bg-[#6BC3B6] py-20 text-black">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-xs uppercase tracking-[.4em] font-bold mb-8 opacity-70">Our Mission</h2>
+            <p class="text-3xl md:text-4xl font-light leading-snug">
+                Union cultivates the <span class="serif italic">divine spark</span> in our neighbors for the good of the city and the world it inspires through outstanding coffee, robust community and engaging causes.
+            </p>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-24">
+        <h2 class="text-center text-4xl font-bold mb-16 uppercase tracking-tighter">Our Core Values</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+            <div class="value-card">
+                <h3 class="text-[var(--terracotta)] font-bold uppercase text-xs tracking-[.3em] mb-4">Apostleship</h3>
+                <p class="text-sm leading-relaxed text-gray-400">We don’t adhere to ‘the way things have been done,’ but entrepreneurially take old pathways and bring them to new communities, contexts, schools of thought, conversations and paradigms. We construct new matter from old materials.</p>
+            </div>
+
+            <div class="value-card">
+                <h3 class="text-[var(--terracotta)] font-bold uppercase text-xs tracking-[.3em] mb-4">Boundary-Breaking</h3>
+                <p class="text-sm leading-relaxed text-gray-400">We embrace playful, constructive ways to color outside the lines that separate people from people, institutions from institutions and the present from the future. We poke social divides and peer through holes to see what is on the other side.</p>
+            </div>
+
+            <div class="value-card">
+                <h3 class="text-[var(--terracotta)] font-bold uppercase text-xs tracking-[.3em] mb-4">Generosity</h3>
+                <p class="text-sm leading-relaxed text-gray-400">We offer our vulnerability, our resources, our time, our voice, our privilege, our light, our hope, our story and ourselves. So that Dallas might be better. So that the world might be better.</p>
+            </div>
+
+            <div class="value-card">
+                <h3 class="text-[var(--terracotta)] font-bold uppercase text-xs tracking-[.3em] mb-4">Quality</h3>
+                <p class="text-sm leading-relaxed text-gray-400">When there are few standards to follow, we will be the standard against which others are measured. We set an example by our bold failures and brilliant successes.</p>
+            </div>
+
+            <div class="value-card">
+                <h3 class="text-[var(--terracotta)] font-bold uppercase text-xs tracking-[.3em] mb-4">Sanctuary</h3>
+                <p class="text-sm leading-relaxed text-gray-400">Sanctuary is more than a place. We must choose sanctuary in order to offer refuge to those who feel threatened. Sanctuary dwells in people and swims in cups of coffee that tell us we are okay.</p>
+            </div>
+
+            <div class="value-card">
+                <h3 class="text-[var(--terracotta)] font-bold uppercase text-xs tracking-[.3em] mb-4">Storytelling</h3>
+                <p class="text-sm leading-relaxed text-gray-400">We tell stories on stages, around tables, behind counters, online, and most importantly, with the decisions we make. We tell our own stories and the stories that make us who we are.</p>
+            </div>
+
+            <div class="value-card">
+                <h3 class="text-[var(--terracotta)] font-bold uppercase text-xs tracking-[.3em] mb-4">Sustainability</h3>
+                <p class="text-sm leading-relaxed text-gray-400">We attend to and craft ecosystems that nourish the long-term health of that which is alive—communities, people, plants, ideas and dreams.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-6 py-12">
+        <div class="bg-[var(--card)] p-12 rounded-sm border border-white/5 shadow-xl">
+            <div class="flex justify-between items-end mb-4">
+                <h3 class="uppercase tracking-widest text-xs font-bold">2025 Housing Initiative Goal</h3>
+                <span class="text-[var(--gold)] font-bold">$42,500 / $50,000</span>
+            </div>
+            <div class="progress-bg w-full h-4 bg-neutral-800 rounded-full overflow-hidden">
+                <div class="progress-bar h-full bg-[var(--accent)]" style="width: 85%"></div>
+            </div>
+            <p class="mt-6 text-sm text-gray-500">Funds directly supporting transitional housing for youth aging out of the foster care system in Dallas.</p>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="stat-card border-t border-[var(--gold)] pt-8">
+            <h4 class="text-4xl font-bold mb-2">100%</h4>
+            <p class="text-xs uppercase tracking-[.2em] font-bold mb-4">Net Profit Reinvestment</p>
+            <p class="text-sm text-gray-500">After our staff is paid a living wage, every cent goes to our local partners.</p>
+        </div>
+        <div class="stat-card border-t border-[var(--gold)] pt-8">
+            <h4 class="text-4xl font-bold mb-2">12,400+</h4>
+            <p class="text-xs uppercase tracking-[.2em] font-bold mb-4">Meals Served</p>
+            <p class="text-sm text-gray-500">In partnership with local food pantries to combat food deserts in Oak Lawn.</p>
+        </div>
+        <div class="stat-card border-t border-[var(--gold)] pt-8">
+            <h4 class="text-4xl font-bold mb-2">Living</h4>
+            <p class="text-xs uppercase tracking-[.2em] font-bold mb-4">Wage Certified</p>
+            <p class="text-sm text-gray-500">We believe justice starts at home. All baristas earn a thriving wage plus benefits.</p>
+        </div>
+    </section>
+
+    <section class="bg-neutral-900 py-24 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-2xl uppercase tracking-widest font-bold mb-16">Our Partners in Change</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 opacity-50 grayscale hover:grayscale-0 transition duration-500">
+                <div class="font-bold text-xl uppercase tracking-tighter italic">Cafe Momentum</div>
+                <div class="font-bold text-xl uppercase tracking-tighter italic">Capes 4 Kids</div>
+                <div class="font-bold text-xl uppercase tracking-tighter italic">Junior Players</div>
+                <div class="font-bold text-xl uppercase tracking-tighter italic">Project Transformation</div>
+                <div class="font-bold text-xl uppercase tracking-tighter italic">Mustang Heroes</div>
+                <div class="font-bold text-xl uppercase tracking-tighter italic">North Texas Food Bank</div>
+                <div class="font-bold text-xl uppercase tracking-tighter italic">North Texas Tornado Relief</div>
+                <div class="font-bold text-xl uppercase tracking-tighter italic">Readers 2 Leaders</div>
+                <div class="font-bold text-xl uppercase tracking-tighter italic">United Methodist Disaster Relief</div>
+                <div class="font-bold text-xl uppercase tracking-tighter italic">Wesley Rankin Center</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 text-center">
+        <h2 class="text-3xl serif italic mb-8">Want to do more?</h2>
+        <button onclick="location.href='https://uniondallas-bloom.kindful.com'" class="bg-[var(--gold)] text-black px-12 py-4 font-bold uppercase text-xs tracking-[.2em] hover:scale-105 transition">Make a Direct Donation</button>
+    </section>
+
+    <footer class="py-12 text-center text-gray-600 text-[10px] tracking-[.3em] uppercase">
+        <p>© 2025 Union Dallas • Sourced for Justice.</p>
+    </footer>
+
+    <script>
+        function togglePanel() {
+            document.getElementById('accPanel').classList.toggle('open');
+        }
+        function toggleFeature(className) {
+            document.body.classList.toggle(className);
+        }
+    </script>
+</body>
+</html>

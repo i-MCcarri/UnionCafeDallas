@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Organization | UNION Dallas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --bg: #121212; 
+            --text: #f4f4f4; 
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            transition: all 0.3s ease; 
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        .glass { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--border); }
+        
+        /* Accessibility Overrides */
+        body.light-mode { --bg: #ffffff; --text: #1a1a1a; --card-bg: #f9f9f9; --border: #ddd; }
+        body.high-contrast { --bg: #000000; --text: #ffffff; --gold: #ffff00; --border: #ffffff; }
+        body.readable-font { font-family: system-ui, sans-serif !important; letter-spacing: 0.02em; line-height: 1.8; }
+        
+        .accessibility-panel { transform: translateX(100%); transition: transform 0.3s ease; }
+        .accessibility-panel.open { transform: translateX(0); }
+        
+        .member-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    </style>
+</head>
+<body id="mainBody">
+
+    <button onclick="togglePanel()" class="fixed bottom-6 right-6 z-[100] bg-[var(--gold)] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs">
+        <span>⚙️ Accessibility</span>
+    </button>
+
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-80 bg-neutral-900 border-l border-white/20 z-[110] p-8 shadow-2xl text-white">
+        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
+        <div class="space-y-6">
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest text-white">Light Mode</span>
+                <input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer">
+                <span class="text-sm uppercase tracking-widest text-white">High Contrast</span>
+                <input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5">
+            </label>
+            <label class="flex items-center justify-between cursor-pointer text-white">
+                <span class="text-sm uppercase tracking-widest">Readable Font</span>
+                <input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5">
+            </label>
+        </div>
+        <button onclick="togglePanel()" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close</button>
+    </div>
+
+    <nav class="p-6 flex justify-between items-center fixed top-0 w-full bg-[var(--bg)]/90 backdrop-blur-md z-50 border-b border-white/10">
+        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span class="text-[var(--gold)]">DTX</span></a>
+        <div class="space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold">
+            <a href="the-coffee.html" class="text-gray-500 hover:text-white transition">The Coffee</a>
+            <a href="the-community.html" class="text-gray-500 hover:text-white transition">The Community</a>
+            <a href="the-cause.html" class="text-gray-500 hover:text-white transition">The Cause</a>
+            <a href="organization.html" class="text-[var(--gold)]">Organization</a>
+        </div>
+    </nav>
+
+    <header class="pt-40 pb-20 px-6 text-center max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-light tracking-tighter mb-6">Our <span class="serif italic">Leadership.</span></h1>
+        <p class="text-gray-400 text-lg leading-relaxed">Meet the people stewarding our mission to cultivate the divine spark in Dallas.</p>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 py-12">
+        <h2 class="text-xs uppercase tracking-[.4em] text-[var(--gold)] font-bold mb-12 border-b border-white/10 pb-4">Executive Committee</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="glass p-8 member-card transition">
+                <img src="assets/images/exec-AndrewBennett.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Andrew Bennett">
+                <h3 class="text-xl font-bold uppercase">Andrew Bennett</h3>
+                <p class="text-[var(--gold)] text-[10px] font-bold uppercase tracking-widest mb-4">Board Chair</p>
+                <p class="text-sm text-gray-500 italic">Speech Language Pathologist | Irving ISD</p>
+            </div>
+
+            <div class="glass p-8 member-card transition">
+                <img src="assets/images/exec-KaitlynFrantz.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Kaitlyn Frantz">
+                <h3 class="text-xl font-bold uppercase">Kaitlyn Frantz</h3>
+                <p class="text-[var(--gold)] text-[10px] font-bold uppercase tracking-widest mb-4">Vice Chair</p>
+                <p class="text-sm text-gray-500 italic">Chaplain | Children’s Medical Center Dallas</p>
+            </div>
+
+            <div class="glass p-8 member-card transition">
+                <img src="assets/images/exec-SavohnaBrown.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Savohna Brown">
+                <h3 class="text-xl font-bold uppercase">Savohna Brown</h3>
+                <p class="text-[var(--gold)] text-[10px] font-bold uppercase tracking-widest mb-4">Treasurer</p>
+                <p class="text-sm text-gray-500 italic">Senior Accountant | Continental Battery Systems</p>
+            </div>
+
+            <div class="glass p-8 member-card transition">
+                <img src="assets/images/exec-AndreaGordon.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Andrea Gordon">
+                <h3 class="text-xl font-bold uppercase">Andrea Gordon</h3>
+                <p class="text-[var(--gold)] text-[10px] font-bold uppercase tracking-widest mb-4">Secretary</p>
+                <p class="text-sm text-gray-500 italic">Director of Programming & Leadership Development | Project Transformation North Texas</p>
+            </div>
+
+            <div class="glass p-8 member-card transition">
+                <img src="assets/images/exec-ChelseaJones.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Chelsea Jones">
+                <h3 class="text-xl font-bold uppercase">Chelsea Jones</h3>
+                <p class="text-[var(--gold)] text-[10px] font-bold uppercase tracking-widest mb-4">Staff Parish Relations Chair</p>
+                <p class="text-sm text-gray-500 italic">Strategic Project Manager | Project Transformation National</p>
+            </div>
+
+            <div class="glass p-8 member-card transition border-dashed">
+                <img src="assets/images/Rev-KatieNewsome.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Rev. Katie Newsome">
+                <h3 class="text-xl font-bold uppercase">Rev. Katie Newsome</h3>
+                <p class="text-[var(--gold)] text-[10px] font-bold uppercase tracking-widest mb-4">Lead Pastor</p>
+                <p class="text-sm text-gray-500 italic">Executive Director | Union Coffee</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-24 bg-neutral-900/20">
+        <h2 class="text-xs uppercase tracking-[.4em] text-[var(--gold)] font-bold mb-12 border-b border-white/10 pb-4">Board of Directors</h2>
+        
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/board-DavidKim.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="David Kim">
+                <h4 class="font-bold uppercase text-sm">David Kim</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Software Engineer | Tanium</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/board-BritnaSavarese.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Britna Savarese">
+                <h4 class="font-bold uppercase text-sm">Britna Savarese</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Death Doula & End-of-Life Planner</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/board-CarolinePearce.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Caroline Pearce">
+                <h4 class="font-bold uppercase text-sm">Caroline Pearce</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Marketing Coordinator | Weaver & Tidwell L.L.P.</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/board-ChristianJovel.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Christian Jovel">
+                <h4 class="font-bold uppercase text-sm">Christian Jovel</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Bilingual Teacher | Dallas ISD</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/board-JessicaVittorio.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Jessica Vittorio">
+                <h4 class="font-bold uppercase text-sm">Jessica Vittorio</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Senior VP of Legal | VusionGroup</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/board-JoeyRodriguez.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Joey Rodriguez">
+                <h4 class="font-bold uppercase text-sm">Joey Rodriguez</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Commit To Leaders | The Commit Partnership</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/board-KimHoang.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Kim Hoang">
+                <h4 class="font-bold uppercase text-sm">Kim Hoang</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Director – Mission & Grants | Texas Women’s Foundation</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/board-MaddieSavage.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Maddie Savage">
+                <h4 class="font-bold uppercase text-sm">Maddie Savage</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Clinical Operations and Risk Management</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/Rev-KatieNewsome2.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Rev. Katie Newsome">
+                <h4 class="font-bold uppercase text-sm">Rev. Katie Newsome</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Executive Director & Lead Pastor| Union Coffee</p>
+            </div>
+
+            <div class="glass p-6 member-card transition col-span-1 lg:col-span-1">
+                <img src="assets/images/board-Rev.-RandallLucas.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Rev. Randall Lucas">
+                <h4 class="font-bold uppercase text-sm">Rev. Randall Lucas</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Senior Pastor | St. Stephen UMC</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-12">
+        <h2 class="text-xs uppercase tracking-[.4em] text-[var(--gold)] font-bold mb-12 border-b border-white/10 pb-4">Ex-Officio Members</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/Rev-KatieNewsome2.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Rev. Katie Newsome">
+                <h4 class="font-bold uppercase text-sm">Rev. Katie Newsome</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Executive Director & Lead Pastor| Union Coffee</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/EOff-RevEdlenCowley.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Rev. Edlen Cowley">
+                <h4 class="font-bold uppercase text-sm">Rev. Edlen Cowley</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Metro District Superintendent | North Texas Conference of UMC</p>
+            </div>
+
+            <div class="glass p-6 member-card transition">
+                <img src="assets/images/EOff-RevOwenRoss.jpeg" class="w-full h-80 object-cover grayscale transition duration-500" alt="Rev. Owen Ross">
+                <h4 class="font-bold uppercase text-sm">Rev. Owen Ross</h4>
+                <p class="text-xs text-gray-500 italic mt-2">Director of Multiplication | North Texas Conference UMC</p>
+            </div>  
+    </section>    
+
+    <footer class="py-12 text-center text-gray-600 text-[10px] tracking-[.3em] uppercase border-t border-white/5">
+        <p>© 2025 Union Dallas • Sourced for Justice.</p>
+    </footer>
+
+    <script>
+        function togglePanel() {
+            document.getElementById('accPanel').classList.toggle('open');
+        }
+        function toggleFeature(className) {
+            document.body.classList.toggle(className);
+        }
+    </script>
+</body>
+</html>
