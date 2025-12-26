@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Menu | UNION Dallas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #D4AF37; 
+            --bg: #121212; 
+            --text: #f4f4f4; 
+            --card: #1a1a1a;
+            --line: rgba(255,255,255,0.1);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            transition: all 0.3s ease; 
+        }
+
+        .serif { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        /* Hero Image Container Styling */
+        .hero-container {
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+        
+        /* Interactive Hover States */
+        .menu-item { 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            padding: 1.5rem; 
+            margin: -1.5rem; 
+            border-radius: 8px;
+        }
+        .menu-item:hover { 
+            background: rgba(212, 175, 55, 0.1); 
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .menu-item:hover h3 { color: var(--gold); }
+
+        /* Modal & Cart Panel Logic */
+        .panel-slide { 
+            transform: translateX(100%); 
+            transition: transform 0.4s ease; 
+        }
+
+        .panel-slide.open { 
+            transform: translateX(0); 
+        }
+
+        .modal-bg { 
+            display: none; 
+            background: rgba(0,0,0,0.85); 
+            backdrop-filter: blur(4px); 
+            z-index: 1000; 
+        }
+
+        .modal-bg.active { 
+            display: flex; 
+        }
+        
+         /* Accessibility Overrides */
+        body.light-mode { 
+            --bg: #fdfdfb; 
+            --text: #1a1a1a; 
+            --card: #ffffff; 
+            --line: rgba(0,0,0,0.1); 
+        }
+
+        body.high-contrast { 
+            --bg: #000000; 
+            --text: #ffffff; 
+            --gold: #ffff00; 
+            --card: #000000; 
+            --line: #ffffff; 
+        }
+
+        body.readable-font { 
+            font-family: system-ui, sans-serif !important; 
+            line-height: 1.8; 
+            letter-spacing: 0.02em; 
+        }
+
+        .accessibility-panel { 
+            transform: translateX(100%); 
+            transition: transform 0.3s ease; 
+            z-index: 1200; 
+        }
+
+        .accessibility-panel.open { 
+            transform: translateX(0); 
+        }
+
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        .category-header { 
+            border-bottom: 1px solid var(--gold); 
+            margin-bottom: 2rem; 
+            padding-bottom: 0.5rem; 
+        }
+
+        /* Script Logo Styling */
+        .nav-logo-script {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.05em;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .highlight {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body id="mainBody" class="overflow-x-hidden">
+
+    <button onclick="togglePanel('accPanel')" class="fixed bottom-6 left-6 z-[1100] bg-[var(--gold)] text-black p-4 rounded-full shadow-2xl hover:scale-110 transition flex items-center gap-2 font-bold uppercase text-xs">
+        <span>⚙️ Accessibility</span>
+    </button>
+
+    <div id="globalOverlay" class="modal-bg fixed inset-0 items-center justify-center p-6" onclick="closePopups()">
+        <div class="bg-neutral-900 border border-white/10 w-full max-w-lg p-10 relative" onclick="event.stopPropagation()">
+            <button onclick="closePopups()" class="absolute top-4 right-4 text-white/50 hover:text-white uppercase text-[10px] tracking-widest">Close</button>
+            <div id="modalBody">
+                </div>
+            <div class="mt-10 pt-6 border-t border-white/10">
+                <button id="addToOrderBtn" class="w-full bg-[var(--gold)] text-black py-4 font-bold uppercase text-xs tracking-[.2em] hover:brightness-110">Add to Order</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartPanel" class="panel-slide fixed top-0 right-0 h-full w-full md:w-96 bg-neutral-900 border-l border-white/20 z-[1100] p-8 flex flex-col shadow-2xl">
+        <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+            <h2 class="text-xl font-bold uppercase tracking-widest">Your Cart</h2>
+            <button onclick="togglePanel('cartPanel')" class="text-xs opacity-50 hover:opacity-100 uppercase tracking-widest">Close</button>
+        </div>
+        <div id="cartContent" class="flex-grow space-y-6 overflow-y-auto">
+            <p class="text-gray-500 italic">Your cart is currently empty.</p>
+        </div>
+        <div class="pt-8 border-t border-white/10">
+            <div class="flex justify-between text-lg font-bold mb-6">
+                <span>Total</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="w-full bg-white text-black py-4 font-bold uppercase text-xs tracking-[.2em] hover:bg-[var(--gold)] transition">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div id="accPanel" class="accessibility-panel fixed top-0 right-0 h-full w-80 bg-neutral-900 border-l border-white/20 p-8 text-white">
+        <h2 class="text-xl font-bold mb-6 border-b border-white/10 pb-2 uppercase tracking-tighter">Settings</h2>
+        <div class="space-y-6">
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Light Mode</span><input type="checkbox" onchange="toggleFeature('light-mode')" class="w-5 h-5"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">High Contrast</span><input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-5 h-5"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Readable Font</span><input type="checkbox" onchange="toggleFeature('readable-font')" class="w-5 h-5"></label>
+        </div>
+        <button onclick="togglePanel('accPanel')" class="mt-12 w-full border border-white/20 py-2 hover:bg-white/10 uppercase text-xs tracking-widest transition">Close</button>
+    </div>
+
+    <nav class="p-6 flex justify-between items-center fixed top-0 w-full bg-[var(--bg)]/90 backdrop-blur-md z-50 border-b border-white/10">
+        <a href="index.html" class="text-xl font-bold tracking-tighter"><span class="nav-logo-script">Union</span><span class="text-[var(--gold)]">DTX</span></a>
+        <div class="flex items-center gap-8">
+            <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold">
+                <a href="the-coffee.html" class="text-[var(--gold)]">The Coffee</a>
+                <a href="the-community.html" class="hover:text-[var(--gold)] transition">The Community</a>
+                <a href="the-cause.html" class="hover:text-[var(--gold)] transition">The Cause</a>
+            </div>
+            <button onclick="togglePanel('cartPanel')" class="relative">
+                <span class="text-xs font-bold uppercase tracking-widest">Cart</span>
+                <span id="cartBadge" class="absolute -top-3 -right-4 bg-[var(--gold)] text-black text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </nav>
+
+<div class="hero-container pt-20">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070" alt="Specialty Coffee Spread" class="hero-image">
+    </div>
+
+    <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+        <header class="mb-20">
+            <h1 class="text-6xl md:text-8xl font-light tracking-tighter mb-4">The <span class="serif italic">Menu.</span></h1>
+            <p class="text-gray-400 uppercase tracking-[0.4em] text-xs">Hover to explore • Click to order</p>
+        </header>
+
+        <section class="mb-24">
+            <div class="border-b border-[var(--gold)] mb-12 pb-2"><h2 class="text-2xl font-bold uppercase tracking-widest"><span class="serif italic">Winter</span> Sips</h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                
+                <div class="menu-item" onclick="showItem('Son of A Nutmeg', 'Vanilla, eggnog*, and nutmeg magic. (*Lactose-free, contains dairy)', 7.50)">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-bold uppercase tracking-tight">Son of A Nutmeg</h3>
+                        <span class="text-sm">$7.50</span>
+                    </div>
+                    <p class="text-xs text-gray-500 italic">Holiday magic in a cup.</p>
+                </div>
+
+                <div class="menu-item" onclick="showItem('Snowy Mint Mocha', 'Peppermint, white mocha, and espresso with whipped cream.', 7.50)">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-bold uppercase tracking-tight">Snowy Mint Mocha</h3>
+                        <span class="text-sm">$7.50</span>
+                    </div>
+                    <p class="text-xs text-gray-500 italic">Refreshing and cozy.</p>
+                </div>
+
+                <div class="menu-item" onclick="showItem('The Nutcracker', 'Caramel, pistachio, and cookie butter with espresso.', 7.50)">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-bold uppercase tracking-tight">The Nutcracker</h3>
+                        <span class="text-sm">$7.50</span>
+                    </div>
+                    <p class="text-xs text-gray-500 italic">Sweet, salty, and dramatic.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="border-b border-white/10 mb-12 pb-2"><h2 class="text-2xl font-bold uppercase tracking-widest">Classic Coffee</h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                <div class="menu-item" onclick="showItem('Drip Coffee', 'Onyx Southern Weather blend. Medium roast.', 3.75)">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-bold uppercase tracking-tight">Drip Coffee</h3>
+                        <span class="text-sm">$3.75</span>
+                    </div>
+                    <p class="text-xs text-gray-500 italic">Clean, classic, consistent.</p>
+                </div>
+                <div class="menu-item" onclick="showItem('Cold Brew', 'Onyx Cold Brew, 24-hour steep.', 5.25)">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="font-bold uppercase tracking-tight">Cold Brew</h3>
+                        <span class="text-sm">$5.25</span>
+                    </div>
+                    <p class="text-xs text-gray-500 italic">Smooth energy.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let shoppingCart = [];
+        let activeItem = null;
+
+        function togglePanel(id) {
+            document.getElementById(id).classList.toggle('open');
+        }
+
+        function toggleFeature(className) {
+            document.body.classList.toggle(className);
+        }
+
+        function showItem(name, desc, price) {
+            activeItem = { name, desc, price };
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2 class="text-4xl font-light serif italic mb-4">${name}</h2>
+                <p class="text-[var(--gold)] text-xl font-bold mb-6">$${price.toFixed(2)}</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-8">${desc}</p>
+                <div class="space-y-4">
+                    <label class="block text-[10px] uppercase tracking-widest opacity-50 font-bold">Milk Selection</label>
+                    <select class="w-full bg-neutral-800 border border-white/10 p-3 text-sm rounded outline-none">
+                        <option>Whole Milk</option>
+                        <option>Oat Milk (+$0.75)</option>
+                        <option>Almond Milk (+$0.75)</option>
+                    </select>
+                </div>
+            `;
+            document.getElementById('globalOverlay').classList.add('active');
+        }
+
+        function closePopups() {
+            document.getElementById('globalOverlay').classList.remove('active');
+        }
+
+        document.getElementById('addToOrderBtn').addEventListener('click', () => {
+            shoppingCart.push(activeItem);
+            updateCartUI();
+            closePopups();
+            togglePanel('cartPanel');
+        });
+
+        function updateCartUI() {
+            const content = document.getElementById('cartContent');
+            const badge = document.getElementById('cartBadge');
+            const totalDisplay = document.getElementById('cartTotal');
+            
+            badge.innerText = shoppingCart.length;
+            
+            if (shoppingCart.length === 0) {
+                content.innerHTML = `<p class="text-gray-500 italic">Your cart is currently empty.</p>`;
+                totalDisplay.innerText = "$0.00";
+                return;
+            }
+
+            let total = 0;
+            content.innerHTML = shoppingCart.map((item, idx) => {
+                total += item.price;
+                return `
+                    <div class="flex justify-between items-center group">
+                        <div>
+                            <p class="font-bold uppercase text-xs">${item.name}</p>
+                            <p class="text-[10px] text-gray-500">$${item.price.toFixed(2)}</p>
+                        </div>
+                        <button onclick="removeItem(${idx})" class="text-[9px] uppercase tracking-widest text-red-500 opacity-0 group-hover:opacity-100 transition">Remove</button>
+                    </div>
+                `;
+            }).join('');
+            
+            totalDisplay.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function removeItem(index) {
+            shoppingCart.splice(index, 1);
+            updateCartUI();
+        }
+    </script>
+</body>
+</html>
