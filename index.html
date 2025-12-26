@@ -16,6 +16,17 @@
             --brand-slate: #3C4852;
         }
         
+        /* Script Logo Styling */
+        .nav-logo-script {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.05em;
+            color: var(--white);
+            line-height: 1;
+        }
+
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: var(--bg); 
@@ -41,7 +52,11 @@
             line-height: 1;
         }
 
-        .nav-blur { backdrop-filter: blur(10px); background: rgba(18, 18, 18, 0.8); }
+        .nav-blur { 
+            background: var(--card-bg); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid var(--border);  
+        }
 
         .accessibility-panel { 
             transform: translateX(100%); 
