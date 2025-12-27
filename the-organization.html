@@ -44,14 +44,60 @@
 
         
         /* Accessibility Overrides */
-        body.light-mode { --bg: #ffffff; --text: #1a1a1a; --card-bg: #f9f9f9; --border: #ddd; }
-        body.high-contrast { --bg: #000000; --text: #ffffff; --gold: #ffff00; --border: #ffffff; }
-        body.readable-font { font-family: system-ui, sans-serif !important; letter-spacing: 0.02em; line-height: 1.8; }
+        body.light-mode { 
+            --bg: #ffffff; 
+            --text: #1a1a1a; 
+            --card-bg: #f9f9f9; 
+            --border: #ddd; 
+        }
+
+        body.high-contrast { 
+            --bg: #000000; 
+            --text: #ffffff; 
+            --gold: #ffff00; 
+            --border: #ffffff; 
+        }
+
+        body.readable-font { 
+            font-family: system-ui, sans-serif !important; 
+            letter-spacing: 0.02em; 
+            line-height: 1.8; 
+        }
+
+        .accessibility-panel { 
+            transform: translateX(100%); 
+            transition: transform 0.3s ease; 
+        }
+
+        .accessibility-panel.open { 
+            transform: translateX(0); 
+        }
         
-        .accessibility-panel { transform: translateX(100%); transition: transform 0.3s ease; }
-        .accessibility-panel.open { transform: translateX(0); }
-        
-        .member-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+        .member-card:hover { 
+            border-color: var(--gold); 
+            transform: translateY(-4px); 
+        }
+
+        /*column tile footer */
+        .category-header { 
+            border-bottom: 1px solid var(--gold); 
+            margin-bottom: 2rem; 
+            padding-bottom: 0.5rem; 
+        }
+
+        /*animate tile */
+        .category-header-grey:hover { 
+            transform: scale(1.05); /* Makes the icon 5% larger */
+            transition: all 0.2s ease-in-out;
+        }
+
+        /*tile height*/
+        .category-header-grey { 
+            border-bottom: 1px dashed #3C4852; 
+            margin-bottom: 2rem; 
+            padding-bottom: 0.5rem; 
+        }
+
     </style>
 </head>
 <body id="mainBody">
@@ -245,52 +291,52 @@
     </section>
     
     <section class="bg-[#1a1a1a] py-20 px-6 border-t border-white/10">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
-                    <div class="space-y-4">
-                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Our Location</h3>
-                        <p class="serif italic text-3xl text-white">Visit Us.</p>
-                        <p class="text-gray-400 leading-relaxed uppercase text-xs tracking-widest">
-                            3705 Cedar Springs Rd<br>
-                            Dallas, TX 75219
-                        </p>
-                        <a href="https://maps.google.com" target="_blank" class="inline-block pt-2 text-[var(--gold)] border-b border-[var(--gold)] text-[10px] uppercase tracking-widest font-bold hover:text-white hover:border-white transition">
-                            Get Directions
-                        </a>
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                <div class="space-y-4 category-header-grey">
+                    <h3 class="category-header-grey text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Our Location</h3>
+                    <p class="serif italic text-3xl text-white">Visit Us.</p>
+                    <p class="text-gray-400 leading-relaxed uppercase text-xs tracking-widest">
+                        3705 Cedar Springs Rd<br>
+                        Dallas, TX 75219
+                    </p>
+                    <a href="https://maps.google.com" target="_blank" class="inline-block pt-2 text-[var(--gold)] border-b border-[var(--gold)] text-[10px] uppercase tracking-widest font-bold hover:text-white hover:border-white transition">
+                        Get Directions
+                    </a>
+                </div>
+
+                <div class="space-y-4 category-header-grey">
+                    <h3 class="category-header-grey text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Get In Touch</h3>
+                    <p class="serif italic text-3xl text-white">Connect.</p>
+                    <div class="text-gray-400 uppercase text-xs tracking-widest space-y-2">
+                        <p>Phone: (214) 242-9725</p>
+                        <p>Email: info@uniondallas.org</p>
                     </div>
+                    <div class="flex justify-center md:justify-start space-x-4 pt-2">
+                        <a href="the-feed.html" class="opacity-50 hover:opacity-100 transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="opacity-50 hover:opacity-100 transition">ⓕ</a>
+                        <a href="#" class="opacity-50 hover:opacity-100 transition">𝕏</a>
+                    </div>
+                </div>  
 
-                    <div class="space-y-4">
-                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Get In Touch</h3>
-                        <p class="serif italic text-3xl text-white">Connect.</p>
-                        <div class="text-gray-400 uppercase text-xs tracking-widest space-y-2">
-                            <p>Phone: (214) 242-9725</p>
-                            <p>Email: info@uniondallas.org</p>
-                        </div>
-                        <div class="category-header flex justify-center md:justify-start space-x-4 pt-2">
-                            <a href="the-feed.html" class="opacity-50 hover:opacity-100 transition"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#" class="opacity-50 hover:opacity-100 transition">ⓕ</a>
-                            <a href="#" class="opacity-50 hover:opacity-100 transition">𝕏</a>
-                        </div>
-                    </div>  
-
-                    <div class="space-y-4">
-                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">The Hours</h3>
-                        <p class="serif italic text-3xl text-white">Join Us.</p>
-                        <div class="category-header grid grid-cols-2 text-gray-400 uppercase text-[10px] tracking-[0.2em]">
-                            <span class="font-bold text-white">Mon - Fri</span>
-                            <span class="text-right">7:00am - 7:00pm</span>
-                            
-                            <span class="font-bold text-white">Sat - Sun</span>
-                            <span class="text-right">8:00am - 5:00pm</span><br><br><br>
-                        </div>
-                        <div class="text-[9px] text-[var(--brand-terracotta)] font-bold tracking-widest uppercase italic pt-2">
-                            <span class="font-bold text-white">* Sunday Gathering</span>
-                            <span class="text-right">10:00am - 11:00am</span>
-                        </div>
+                <div class="space-y-4 category-header-grey">
+                    <h3 class="category-header-grey text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">The Hours</h3>
+                    <p class="serif italic text-3xl text-white">Join Us.</p><br>
+                    <div class="grid grid-cols-2 text-gray-400 uppercase text-[10px] tracking-[0.2em]">
+                        <span class="font-bold text-white">Mon - Fri</span>
+                        <span class="text-right">7:00am - 7:00pm</span>
+                        
+                        <span class="font-bold text-white">Sat - Sun</span>
+                        <span class="text-right">8:00am - 5:00pm</span><br><br>
+                    </div>
+                    <div class="text-[9px] text-[var(--brand-terracotta)] font-bold tracking-widest uppercase italic pt-2">
+                        <span class="font-bold text-white">* Sunday Gathering</span>
+                        <span class="text-right">10:00am - 11:00am</span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
     <footer class="py-12 text-center text-gray-600 text-[10px] tracking-[.3em] uppercase border-t border-white/5">
         <p>© 2025 Union Dallas • Sourced for Justice.</p>

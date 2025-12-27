@@ -111,6 +111,24 @@
             transform: scale(1.1); /* Makes the icon 10% larger */
             transition: all 0.2s ease-in-out;
         }
+
+        .category-header { 
+            border-bottom: 1px solid var(--gold); 
+            margin-bottom: 2rem; 
+            padding-bottom: 0.5rem; 
+        }
+
+        .category-header-grey:hover { 
+            transform: scale(1.05); /* Makes the icon 5% larger */
+            transition: all 0.2s ease-in-out;
+        }
+
+        .category-header-grey { 
+            border-bottom: 1px dashed #3C4852; 
+            margin-bottom: 2rem; 
+            padding-bottom: 0.5rem; 
+        }
+
     </style>
 </head>
 <body id="main-content">
@@ -278,53 +296,82 @@
         </div>
     </section>
 
-    <section class="bg-[#1a1a1a] py-20 px-6 border-t border-white/10">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
-                    <div class="space-y-4">
-                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Our Location</h3>
-                        <p class="serif italic text-3xl text-white">Visit Us.</p>
-                        <p class="text-gray-400 leading-relaxed uppercase text-xs tracking-widest">
-                            3705 Cedar Springs Rd<br>
-                            Dallas, TX 75219
-                        </p>
-                        <a href="https://maps.google.com" target="_blank" class="inline-block pt-2 text-[var(--gold)] border-b border-[var(--gold)] text-[10px] uppercase tracking-widest font-bold hover:text-white hover:border-white transition">
-                            Get Directions
-                        </a>
+    <section class="history-section">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-xs uppercase tracking-[.4em] font-bold mb-12 text-[var(--gold)]">A Little Bit About Onyx...</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <p class="text-xl md:text-2xl font-light leading-relaxed">
+                        From Seed to Social Estuary
+                    </p>
+                    <p class="text-white/70 leading-relaxed">
+                        At Union, we believe every cup should do more than just wake you up; it should connect you to something larger. That’s why we’ve partnered with Onyx Coffee Lab. Like our home in Oak Lawn, Onyx is built on the belief that excellence is a communal effort. We don't just serve coffee; we serve a story of global pilgrimage and local hospitality.
+                    </p>
+                    <ul class="space-y-4 text-white/70 border-l border-[var(--gold)] pl-6 italic">
+                        <li>Our commitment to you starts with Direct Trade. This isn't just a label; it’s a handshake. By bypassing traditional commodity markets, Onyx works directly with farmers, ensuring they receive far above "fair trade" wages. When you sip a latte at Union, you are participating in a transparent supply chain that honors the dignity of the hands that picked the cherries.</li>
+                        <li>We celebrate the "divine spark" in every bean through our Single Origin offerings. Just as every neighbor in Dallas has a unique story, every coffee region has a distinct voice. Whether it’s the floral brightness of an Ethiopian heirloom or the rich chocolate notes of a Colombian micro-lot, we serve these coffees to highlight the specific soil, altitude, and culture of their home.</li>
+                        <li>To honor the hard work of the producers, we prioritize Whole Bean quality. We grind only what we need, exactly when we need it, using precision techniques to ensure that the complex flavors developed at the origin make it into your cup. This ensures that every note—from citrus to cedar—is as vibrant as the community gathering around our tables.</li>
+                    </ul>
+                </div>
+                <div class="space-y-6 flex flex-col justify-end">
+                    <div class="w-full h-full border border-dashed border-white/10 flex items-center justify-center italic text-gray-600">
+                        <img src="assets/images/onyx-brand.png">
                     </div>
+                </div>
+                <p class="text-lg leading-relaxed text-white/80">
+                        By choosing Onyx, you are helping Union remain a "social estuary"—a place where different walks of life flow together. Your choice supports sustainable farming abroad and local generosity here in Dallas. Together, we are proving that a high bar for specialty coffee goes hand-in-hand with a high bar for neighborly love.
+                </p>
+            </div>
+        </div>
+    </section>
 
-                    <div class="space-y-4">
-                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Get In Touch</h3>
-                        <p class="serif italic text-3xl text-white">Connect.</p>
-                        <div class="text-gray-400 uppercase text-xs tracking-widest space-y-2">
-                            <p>Phone: (214) 242-9725</p>
-                            <p>Email: info@uniondallas.org</p>
-                        </div>
-                        <div class="category-header flex justify-center md:justify-start space-x-4 pt-2">
-                            <a href="the-feed.html" class="opacity-50 hover:opacity-100 transition"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#" class="opacity-50 hover:opacity-100 transition">ⓕ</a>
-                            <a href="#" class="opacity-50 hover:opacity-100 transition">𝕏</a>
-                        </div>
-                    </div>  
+    <section class="bg-[#1a1a1a] py-20 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                <div class="space-y-4 category-header-grey">
+                    <h3 class="category-header-grey text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Our Location</h3>
+                    <p class="serif italic text-3xl text-white">Visit Us.</p>
+                    <p class="text-gray-400 leading-relaxed uppercase text-xs tracking-widest">
+                        3705 Cedar Springs Rd<br>
+                        Dallas, TX 75219
+                    </p>
+                    <a href="https://maps.google.com" target="_blank" class="inline-block pt-2 text-[var(--gold)] border-b border-[var(--gold)] text-[10px] uppercase tracking-widest font-bold hover:text-white hover:border-white transition">
+                        Get Directions
+                    </a>
+                </div>
 
-                    <div class="space-y-4">
-                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">The Hours</h3>
-                        <p class="serif italic text-3xl text-white">Join Us.</p>
-                        <div class="category-header grid grid-cols-2 text-gray-400 uppercase text-[10px] tracking-[0.2em]">
-                            <span class="font-bold text-white">Mon - Fri</span>
-                            <span class="text-right">7:00am - 7:00pm</span>
-                            
-                            <span class="font-bold text-white">Sat - Sun</span>
-                            <span class="text-right">8:00am - 5:00pm</span><br><br><br>
-                        </div>
-                        <div class="text-[9px] text-[var(--brand-terracotta)] font-bold tracking-widest uppercase italic pt-2">
-                            <span class="font-bold text-white">* Sunday Gathering</span>
-                            <span class="text-right">10:00am - 11:00am</span>
-                        </div>
+                <div class="space-y-4 category-header-grey">
+                    <h3 class="category-header-grey text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Get In Touch</h3>
+                    <p class="serif italic text-3xl text-white">Connect.</p>
+                    <div class="text-gray-400 uppercase text-xs tracking-widest space-y-2">
+                        <p>Phone: (214) 242-9725</p>
+                        <p>Email: info@uniondallas.org</p>
+                    </div>
+                    <div class="flex justify-center md:justify-start space-x-4 pt-2">
+                        <a href="the-feed.html" class="opacity-50 hover:opacity-100 transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="opacity-50 hover:opacity-100 transition">ⓕ</a>
+                        <a href="#" class="opacity-50 hover:opacity-100 transition">𝕏</a>
+                    </div>
+                </div>  
+
+                <div class="space-y-4 category-header-grey">
+                    <h3 class="category-header-grey text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">The Hours</h3>
+                    <p class="serif italic text-3xl text-white">Join Us.</p><br>
+                    <div class="grid grid-cols-2 text-gray-400 uppercase text-[10px] tracking-[0.2em]">
+                        <span class="font-bold text-white">Mon - Fri</span>
+                        <span class="text-right">7:00am - 7:00pm</span>
+                        
+                        <span class="font-bold text-white">Sat - Sun</span>
+                        <span class="text-right">8:00am - 5:00pm</span><br><br>
+                    </div>
+                    <div class="text-[9px] text-[var(--brand-terracotta)] font-bold tracking-widest uppercase italic pt-2">
+                        <span class="font-bold text-white">* Sunday Gathering</span>
+                        <span class="text-right">10:00am - 11:00am</span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
     <footer class="py-12 text-center text-gray-600 text-xs tracking-widest uppercase border-t border-white/5">
         <p>© 2025 Union Dallas. Brewed for the Common Good.</p>
