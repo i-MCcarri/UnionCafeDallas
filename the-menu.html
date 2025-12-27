@@ -6,6 +6,7 @@
     <title>The Full Menu | UNION Dallas Coffee</title> 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { 
             --gold: #D4AF37; 
@@ -139,6 +140,16 @@
             padding-bottom: 0.5rem; 
         }
 
+        /* Bionic Reading block */
+        .bionic-fixation {
+            font-weight: 700;
+            opacity: 1;
+        }
+
+        body.bionic-mode {
+            letter-spacing: 0.01em;
+        }
+
     </style>
 </head>
 <body id="mainBody" class="overflow-x-hidden">
@@ -150,11 +161,11 @@
         </div>
 
         <div class="md:hidden flex flex-col space-y-6 mb-12 border-b border-white/10 pb-10">
-        <a href="the-coffee.html" class="text-lg font-bold uppercase tracking-widest">The Coffee</a>
-        <a href="the-community.html" class="text-lg font-bold uppercase tracking-widest">The Community</a>
-        <a href="the-cause.html" class="text-lg font-bold uppercase tracking-widest">The Cause</a>
-        <a href="the-menu.html" class="text-black px-4 py-2 rounded-sm font-bold uppercase" style="background-color: #D4AF37">The Full Menu</a>
-        <a href="the-feed.html" class="text-black px-4 py-2 rounded-sm font-bold uppercase" style="background-color: #ffffff">[◉"] Instagram</a>
+        <a href="the-coffee.html" class="text-lg font-bold uppercase tracking-widest text-[var(--gold)]">The Coffee</a>
+        <a href="the-community.html" class="hover:text-[var(--gold)] transition text-lg font-bold uppercase tracking-widest">The Community</a>
+        <a href="the-cause.html" class="hover:text-[var(--gold)] transition text-lg font-bold uppercase tracking-widest">The Cause</a>
+        <a href="the-menu.html" class="hover:text-[var(--gold)] transition text-lg font-bold uppercase tracking-widest">The Full Menu</a>
+        <a href="the-feed.html" class="hover:text-[var(--gold)] transition text-lg font-bold uppercase tracking-widest"><i class="fa-brands fa-instagram"></i> Instagram</a>
     </div>
 
         <div class="space-y-8">
@@ -162,6 +173,7 @@
             <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Light Mode</span><input type="checkbox" onchange="toggleFeature('light-mode')" class="w-6 h-6"></label>
             <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">High Contrast</span><input type="checkbox" onchange="toggleFeature('high-contrast')" class="w-6 h-6"></label>
             <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Enhanced Reading</span><input type="checkbox" onchange="toggleFeature('readable-font')" class="w-6 h-6"></label>
+            <label class="flex items-center justify-between cursor-pointer"><span class="text-sm uppercase tracking-widest">Bionic Reading</span><input type="checkbox" onchange="toggleBionic()" class="w-6 h-6"></label>
         </div>
     </div>
 
@@ -326,8 +338,8 @@
         </section>
 
         <section class="mb-24 bg-white/5 p-6 border border-white/10">
-                <h2 class="category-header text-2xl uppercase tracking-widest font-bold">Catering <span class="serif italic"> Menu</span> <span class="highlight">by the Gal</span></h2>
-                <div class="menu-grid">
+            <h2 class="category-header text-2xl uppercase tracking-widest font-bold">Catering <span class="serif italic"> Menu</span> <span class="highlight">by the Gal</span></h2>
+            <div class="menu-grid">
                 <div class="space-y-2">
                     <div class="flex justify-between font-bold border-b border-[var(--line)] pb-1"><span>Drip Coffee</span><span>$20 - $120</span></div>
                     <p class="text-xs text-gray-400">Onyx: Medium Roast | Southern Weather | 1 - 5 Gal<br>Notes of Milk Chocolate • Plum • Candied Walnuts • Citrus</p>
@@ -344,54 +356,52 @@
         </section>
 
         <section class="bg-[#1a1a1a] py-20 px-6 border-t border-white/10">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
-                
-                <div class="space-y-4">
-                    <h3 class="text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Our Location</h3>
-                    <p class="serif italic text-3xl text-white">Visit Us.</p>
-                    <p class="text-gray-400 leading-relaxed uppercase text-xs tracking-widest">
-                        3705 Cedar Springs Rd<br>
-                        Dallas, TX 75219
-                    </p>
-                    <a href="https://maps.google.com" target="_blank" class="inline-block pt-2 text-[var(--gold)] border-b border-[var(--gold)] text-[10px] uppercase tracking-widest font-bold hover:text-white hover:border-white transition">
-                        Get Directions
-                    </a>
-                </div>
-
-                <div class="space-y-4">
-                    <h3 class="text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Get In Touch</h3>
-                    <p class="serif italic text-3xl text-white">Connect.</p>
-                    <div class="text-gray-400 uppercase text-xs tracking-widest space-y-2">
-                        <p>Phone: (214) 242-9725</p>
-                        <p>Email: info@uniondallas.org</p>
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                    <div class="space-y-4">
+                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Our Location</h3>
+                        <p class="serif italic text-3xl text-white">Visit Us.</p>
+                        <p class="text-gray-400 leading-relaxed uppercase text-xs tracking-widest">
+                            3705 Cedar Springs Rd<br>
+                            Dallas, TX 75219
+                        </p>
+                        <a href="https://maps.google.com" target="_blank" class="inline-block pt-2 text-[var(--gold)] border-b border-[var(--gold)] text-[10px] uppercase tracking-widest font-bold hover:text-white hover:border-white transition">
+                            Get Directions
+                        </a>
                     </div>
-                    <div class="flex justify-center md:justify-start space-x-4 pt-2">
-                        <a href="#" class="opacity-50 hover:opacity-100 transition">IG</a>
-                        <a href="#" class="opacity-50 hover:opacity-100 transition">FB</a>
-                        <a href="#" class="opacity-50 hover:opacity-100 transition">X</a>
+
+                    <div class="space-y-4">
+                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Get In Touch</h3>
+                        <p class="serif italic text-3xl text-white">Connect.</p>
+                        <div class="text-gray-400 uppercase text-xs tracking-widest space-y-2">
+                            <p>Phone: (214) 242-9725</p>
+                            <p>Email: info@uniondallas.org</p>
+                        </div>
+                        <div class="category-header flex justify-center md:justify-start space-x-4 pt-2">
+                            <a href="the-feed.html" class="opacity-50 hover:opacity-100 transition"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="opacity-50 hover:opacity-100 transition">ⓕ</a>
+                            <a href="#" class="opacity-50 hover:opacity-100 transition">𝕏</a>
+                        </div>
+                    </div>  
+
+                    <div class="space-y-4">
+                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">The Hours</h3>
+                        <p class="serif italic text-3xl text-white">Join Us.</p>
+                        <div class="category-header grid grid-cols-2 text-gray-400 uppercase text-[10px] tracking-[0.2em]">
+                            <span class="font-bold text-white">Mon - Fri</span>
+                            <span class="text-right">7:00am - 7:00pm</span>
+                            
+                            <span class="font-bold text-white">Sat - Sun</span>
+                            <span class="text-right">8:00am - 5:00pm</span><br><br><br>
+                        </div>
+                        <div class="text-[9px] text-[var(--brand-terracotta)] font-bold tracking-widest uppercase italic pt-2">
+                            <span class="font-bold text-white">* Sunday Gathering</span>
+                            <span class="text-right">10:00am - 11:00am</span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="space-y-4">
-                    <h3 class="text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">The Hours</h3>
-                    <p class="serif italic text-3xl text-white">Join Us.</p>
-                    <div class="grid grid-cols-2 text-gray-400 uppercase text-[10px] tracking-[0.2em]">
-                        <span class="font-bold text-white">Mon - Fri</span>
-                        <span class="text-right">7:00am - 7:00pm</span>
-                        
-                        <span class="font-bold text-white">Sat - Sun</span>
-                        <span class="text-right">8:00am - 5:00pm</span>
-                    </div>
-                    <p class="text-[9px] text-[var(--brand-terracotta)] font-bold tracking-widest uppercase italic pt-2">
-                        * Sunday Gathering at 10:00am
-                    </p>
-                </div>
-
             </div>
-        </div>
-    </section>
-
+        </section>
     </main>
 
     <footer class="py-12 text-center text-gray-600 text-[10px] tracking-[.3em] uppercase border-t border-white/5">
@@ -401,6 +411,47 @@
     <script>
         function togglePanel() { document.getElementById('accPanel').classList.toggle('open'); }
         function toggleFeature(className) { document.body.classList.toggle(className); }
+        let originalContent = "";
+
+        function toggleBionic() {
+            const body = document.body;
+            const mainTextContainer = document.querySelector('main');
+            
+            if (!body.classList.contains('bionic-mode')) {
+                // Store original html to revert later
+                originalContent = mainTextContainer.innerHTML;
+                
+                // Process text nodes
+                applyBionic(mainTextContainer);
+                body.classList.add('bionic-mode');
+            } else {
+                // Restore original text
+                mainTextContainer.innerHTML = originalContent;
+                body.classList.remove('bionic-mode');
+            }
+        }
+
+        function applyBionic(node) {
+            node.childNodes.forEach(child => {
+                if (child.nodeType === Node.TEXT_NODE && child.textContent.trim().length > 0) {
+                    const words = child.textContent.split(/\s+/);
+                    const bionicWords = words.map(word => {
+                        if (word.length <= 3) {
+                            return `<span class="bionic-fixation">${word.slice(0, 1)}</span>${word.slice(1)}`;
+                        } else {
+                            const mid = Math.ceil(word.length / 2);
+                            return `<span class="bionic-fixation">${word.slice(0, mid)}</span>${word.slice(mid)}`;
+                        }
+                    });
+                    
+                    const newSpan = document.createElement('span');
+                    newSpan.innerHTML = bionicWords.join(' ');
+                    child.replaceWith(newSpan);
+                } else if (child.nodeType === Node.ELEMENT_NODE && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE') {
+                    applyBionic(child);
+                }
+            });
+        }
     </script>
 </body>
 </html>

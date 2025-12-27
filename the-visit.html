@@ -6,10 +6,12 @@
     <title>Visit Sunday | UNION Dallas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Base Dynamic Theme Variables */
         :root { 
             --gold: #D4AF37; 
+            --white: #ffffff;
             --bg: #121212; 
             --text: #f4f4f4; 
             --card: #1a1a1a;
@@ -125,6 +127,21 @@
             font-weight: 800; 
             text-transform: uppercase;
         }
+
+        /* The default state */
+        .fa-icons-links {
+            color: var(--white);
+            font-size: 18px;
+            transition: color 0.3s ease; /* This makes the color fade in smoothly */
+        }
+
+        /* The hover state */
+        .fa-icons-links:hover {
+            color: var(--gold);
+            transform: scale(1.1); /* Makes the icon 10% larger */
+            transition: all 0.2s ease-in-out;
+        }
+
     </style>
 </head>
 <body id="page-content">
@@ -135,11 +152,11 @@
         </div>
 
         <div class="md:hidden flex flex-col space-y-6 mb-12 border-b border-white/10 pb-10">
-        <a href="the-coffee.html" class="text-lg font-bold uppercase tracking-widest">The Coffee</a>
-        <a href="the-community.html" class="text-lg font-bold uppercase tracking-widest">The Community</a>
-        <a href="the-cause.html" class="text-lg font-bold uppercase tracking-widest">The Cause</a>
-        <a href="the-visit.html" class="text-black px-4 py-2 rounded-sm font-bold" style="background-color: #D4AF37">Sunday Gathering</a>
-        <a href="the-feed.html" class="text-black px-4 py-2 rounded-sm font-bold" style="background-color: #ffffff">[◉"] Instagram</a>
+        <a href="the-coffee.html" class="hover:text-[var(--gold)] transition text-lg font-bold uppercase tracking-widest">The Coffee</a>
+        <a href="the-community.html" class="hover:text-[var(--gold)] transition text-lg font-bold uppercase tracking-widest">The Community</a>
+        <a href="the-cause.html" class="hover:text-[var(--gold)] transition text-lg font-bold uppercase tracking-widest">The Cause</a>
+        <a href="the-visit.html" class="text-[var(--gold)] text-lg font-bold uppercase tracking-widest">Sunday Gathering</a>
+        <a href="the-feed.html" class="hover:text-[var(--gold)] transition text-lg font-bold uppercase tracking-widest"><i class="fa-brands fa-instagram"></i> Instagram</a>
     </div>
 
         <div class="space-y-8">
@@ -157,7 +174,7 @@
     </a>
 
     <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold items-center">
-        <a href="the-feed.html" class="text-xl font-bold tracking-tighter uppercase" style="color:var(--gold)">[◉"]</a>
+        <a href="the-feed.html" class="fa-icons-links text-xl font-bold tracking-tighter"><i class="fa-brands fa-instagram"></i></a>
         <a href="the-coffee.html" class="hover:text-[var(--gold)] transition">The Coffee</a>
         <a href="the-community.html" class="hover:text-[var(--gold)] transition">The Community</a>
         <a href="the-cause.html" class="hover:text-[var(--gold)] transition">The Cause</a>
@@ -242,6 +259,54 @@
             </div>
         </div>
     </section>
+
+    <section class="bg-[#1a1a1a] py-20 px-6 border-t border-white/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                    <div class="space-y-4">
+                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Our Location</h3>
+                        <p class="serif italic text-3xl text-white">Visit Us.</p>
+                        <p class="text-gray-400 leading-relaxed uppercase text-xs tracking-widest">
+                            3705 Cedar Springs Rd<br>
+                            Dallas, TX 75219
+                        </p>
+                        <a href="https://maps.google.com" target="_blank" class="inline-block pt-2 text-[var(--gold)] border-b border-[var(--gold)] text-[10px] uppercase tracking-widest font-bold hover:text-white hover:border-white transition">
+                            Get Directions
+                        </a>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">Get In Touch</h3>
+                        <p class="serif italic text-3xl text-white">Connect.</p>
+                        <div class="text-gray-400 uppercase text-xs tracking-widest space-y-2">
+                            <p>Phone: (214) 242-9725</p>
+                            <p>Email: info@uniondallas.org</p>
+                        </div>
+                        <div class="category-header flex justify-center md:justify-start space-x-4 pt-2">
+                            <a href="the-feed.html" class="opacity-50 hover:opacity-100 transition"><i class="fa-brands fa-instagram fa-icons"></i></a>
+                            <a href="#" class="opacity-50 hover:opacity-100 transition">ⓕ</a>
+                            <a href="#" class="opacity-50 hover:opacity-100 transition">𝕏</a>
+                        </div>
+                    </div>  
+
+                    <div class="space-y-4">
+                        <h3 class="category-header text-[var(--gold)] uppercase tracking-[0.3em] text-xs font-bold">The Hours</h3>
+                        <p class="serif italic text-3xl text-white">Join Us.</p>
+                        <div class="category-header grid grid-cols-2 text-gray-400 uppercase text-[10px] tracking-[0.2em]">
+                            <span class="font-bold text-white">Mon - Fri</span>
+                            <span class="text-right">7:00am - 7:00pm</span>
+                            
+                            <span class="font-bold text-white">Sat - Sun</span>
+                            <span class="text-right">8:00am - 5:00pm</span><br><br><br>
+                        </div>
+                        <div class="text-[9px] text-[var(--brand-terracotta)] font-bold tracking-widest uppercase italic pt-2">
+                            <span class="font-bold text-white">* Sunday Gathering</span>
+                            <span class="text-right">10:00am - 11:00am</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     <footer class="py-12 text-center border-t border-white/5">
         <p class="text-xs text-gray-600 uppercase tracking-widest">We can't wait to meet you.</p>
